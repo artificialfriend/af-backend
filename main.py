@@ -1,27 +1,17 @@
-import os
-import json
-import time
-import logging
-from fastapi import FastAPI, Response
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from playwright.sync_api import sync_playwright
 
 
 app = FastAPI()
-
-# playwright
-play = sync_playwright().start()
-browser = play.chromium.launch_persistent_context(
-    user_data_dir="/tmp/playwright",
-    headless=False,
-)
-page = browser.new_page()
-
 
 origins = [
     "http://localhost",
     "http://localhost:8080",
 ]
+
+headers = {
+    "Content-Type": "application/json"
+}
 
 app.add_middleware(
     CORSMiddleware,
@@ -31,10 +21,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-headers = {
-    "Content-Type": "application/json"
-}
-
 
 @app.get("/")
 def root():
@@ -42,5 +28,5 @@ def root():
 
 
 @app.get("/chat")
-def chat():
-    return ""
+def chat(prompt: str):
+    return
