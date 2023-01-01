@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-import gpt3api
+from pretrained_transformers.gpt3 import Gpt3
 
 app = FastAPI()
 
@@ -29,5 +29,5 @@ def root():
 
 @app.get("/chat")
 def chat(prompt: str):
-    _Gpt3Api_ = gpt3api.Gpt3Api()
-    return _Gpt3Api_.generate_essay(prompt)
+    gpt3api = Gpt3()
+    return gpt3api.generate_essay(prompt)

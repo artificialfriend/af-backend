@@ -5,10 +5,17 @@ import openai
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 
-class Gpt3Api:
+def extract_text(response):
+    if 'choices' in response and len(response['choices']) > 0:
+        return response['choices'][0]['text']
+    else:
+        raise RuntimeError('Something Went Wrong')
 
-    @staticmethod
-    def request_gpt_3(prompt, model, temperature, max_tokens, top_p, frequency_penalty, presence_penalty):
+
+class Gpt3:
+
+    @classmethod
+    def request(cls, prompt, model, temperature, max_tokens, top_p, frequency_penalty, presence_penalty):
         response = openai.Completion.create(
             model=model,
             prompt=prompt,
@@ -19,13 +26,6 @@ class Gpt3Api:
             presence_penalty=presence_penalty
         )
         return response
-
-    @staticmethod
-    def extract_text(response):
-        if 'choices' in response and len(response['choices']) > 0:
-            return response['choices'][0]['text']
-        else:
-            raise RuntimeError('Something Went Wrong')
 
     def generate_essay(self, prompt):
         """
@@ -39,6 +39,6 @@ class Gpt3Api:
             'frequency_penalty': 0.0,
             'presence_penalty': 0.0
         }
-        response = self.request_gpt_3(prompt, **model_parameters)
+        response = self.request(prompt, **model_parameters)
 
-        return self.extract_text(response)
+        return extract_text(response)
