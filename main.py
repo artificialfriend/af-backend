@@ -29,5 +29,5 @@ def root():
 
 @app.get("/chat")
 def chat(prompt: str):
-    gpt3api = Gpt3()
-    return gpt3api.generate_essay(prompt)
+    gpt3 = Gpt3()
+    return gpt3.generate_essay(prompt)
