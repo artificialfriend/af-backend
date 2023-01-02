@@ -12,33 +12,31 @@ def extract_text(response):
         raise RuntimeError('Something Went Wrong')
 
 
-class Gpt3:
+def send_request(prompt, model, temperature, max_tokens, top_p, frequency_penalty, presence_penalty):
+    response = openai.Completion.create(
+        model=model,
+        prompt=prompt,
+        temperature=temperature,
+        max_tokens=max_tokens,
+        top_p=top_p,
+        frequency_penalty=frequency_penalty,
+        presence_penalty=presence_penalty
+    )
+    return response
 
-    @classmethod
-    def request(cls, prompt, model, temperature, max_tokens, top_p, frequency_penalty, presence_penalty):
-        response = openai.Completion.create(
-            model=model,
-            prompt=prompt,
-            temperature=temperature,
-            max_tokens=max_tokens,
-            top_p=top_p,
-            frequency_penalty=frequency_penalty,
-            presence_penalty=presence_penalty
-        )
-        return response
 
-    def generate_essay(self, prompt):
-        """
-            Example Prompt: "Create an outline for an essay about Nikola Tesla and his contributions to technology:"
-        """
-        model_parameters = {
-            'model': 'text-davinci-003',
-            'temperature': 0.3,
-            'max_tokens': 150,
-            'top_p': 1.0,
-            'frequency_penalty': 0.0,
-            'presence_penalty': 0.0
-        }
-        response = self.request(prompt, **model_parameters)
-
-        return extract_text(response)
+def generate_essay(prompt):
+    """
+        Example Prompt: "Create an outline for an essay about Nikola Tesla and his contributions to technology:"
+    """
+    model_parameters = {
+        'model': 'text-davinci-003',
+        'temperature': 0.3,
+        'max_tokens': 150,
+        'top_p': 1.0,
+        'frequency_penalty': 0.0,
+        'presence_penalty': 0.0
+    }
+    response = send_request(prompt, **model_parameters)
+    print(response)
+    return extract_text(response)

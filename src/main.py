@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from pretrained_transformers.gpt3 import Gpt3
+from pretrained_transformers.gpt3 import generate_essay
 
 app = FastAPI()
 
@@ -75,8 +75,7 @@ def chat_history():
 
 @app.post("/chat")
 def chat(prompt: str):
-    gpt3 = Gpt3()
-    return gpt3.generate_essay(prompt)
+    return generate_essay(prompt)
 
 
 @app.get("/event")
@@ -97,4 +96,3 @@ def create_event():
     3. return [200, ok]
     """
     return "not implemented yet"
-
