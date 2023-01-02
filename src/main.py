@@ -21,8 +21,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# GET Requests
-
 
 @app.get("/")
 def root():
@@ -31,16 +29,51 @@ def root():
 
 @app.put("/sign_up")
 def sign_up():
+    """
+    1. check signature
+    2. create user, af
+    3. return [200, ok]
+    """
     return "not implemented yet"
 
 
 @app.get("/sign_in")
 def sign_in():
+    """
+    1. check signature, user_id, etc.
+    2. return [200, ok]
+    """
     return "not implemented yet"
 
 
-@app.get("/chat")
-# todo: make this a post request
+@app.get("/user")
+def user():
+    """
+    1. check signature, user_id, etc.
+    2. return user
+    """
+    return "not implemented yet"
+
+
+@app.get("/af")
+def af():
+    """
+    1. check signature, user_id, etc.
+    2. return af
+    """
+    return "not implemented yet"
+
+
+@app.get("/chat_history")
+def chat_history():
+    """
+    1. check signature, user_id, etc.
+    2. return chat history
+    """
+    return "not implemented yet"
+
+
+@app.post("/chat")
 def chat(prompt: str):
     gpt3 = Gpt3()
     return gpt3.generate_essay(prompt)
@@ -48,10 +81,20 @@ def chat(prompt: str):
 
 @app.get("/event")
 def get_event():
+    """
+    1. check signature, user_id, event_id, etc.
+    2. query events
+    3. return events
+    """
     return "not implemented yet"
 
 
 @app.put("/event")
 def create_event():
+    """
+    1. check signature, user_id, etc.
+    2. insert event
+    3. return [200, ok]
+    """
     return "not implemented yet"
 
