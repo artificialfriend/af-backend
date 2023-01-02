@@ -21,6 +21,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# todo: use async-await
+
 
 @app.get("/")
 def root():
