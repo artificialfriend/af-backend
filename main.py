@@ -29,26 +29,25 @@ def root():
     return {"message": "welcome to af"}
 
 
+@app.put("/sign_up")
+def sign_up():
+    return "not implemented yet"
+
+
+@app.get("/sign_in")
+def sign_in():
+    return "not implemented yet"
+
+
 @app.get("/chat")
+# todo: make this a post request
 def chat(prompt: str):
     gpt3 = Gpt3()
     return gpt3.generate_essay(prompt)
 
 
-@app.get("/user")
-def get_user():
-    return "not implemented yet"
-
-
 @app.get("/event")
 def get_event():
-    return "not implemented yet"
-
-# PUT Requests
-
-
-@app.put("/user")
-def create_user():
     return "not implemented yet"
 
 
