@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from pretrained_transformers.gpt3 import generate_essay
+from pretrained_transformer.gpt3 import generate_essay
 
 app = FastAPI()
 
