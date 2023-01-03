@@ -4,10 +4,10 @@ from sqlalchemy.orm import relationship
 from metadata_db_constants import Base
 
 
-class User(Base):
+class UserTable(Base):
     __tablename__ = "users"
 
-    id = Column(INTEGER, primary_key=True)
+    user_id = Column(INTEGER, primary_key=True)
     first_name = Column(VARCHAR, nullable=False)
     last_name = Column(VARCHAR, nullable=False)
     user_name = Column(VARCHAR, nullable=False, unique=True)

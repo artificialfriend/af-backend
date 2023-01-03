@@ -3,10 +3,10 @@ from sqlalchemy.dialects.postgresql import VARCHAR, TIMESTAMP, INTEGER, BOOLEAN
 from metadata_db_constants import Base
 
 
-class Event(Base):
+class EventTable(Base):
     __tablename__ = "events"
 
-    id = Column(INTEGER, primary_key=True)
+    event_id = Column(INTEGER, primary_key=True)
     user_id = Column(INTEGER, ForeignKey="users.id", nullable=False)
     name = Column(VARCHAR, nullable=False)
     course = Column(VARCHAR, nullable=False)

@@ -3,7 +3,7 @@ from sqlalchemy.dialects.postgresql import VARCHAR, TIMESTAMP, INTEGER, BOOLEAN
 from metadata_db_constants import Base
 
 
-class Chat(Base):
+class ChatTable(Base):
     __tablename__ = "chats"
 
     id = Column(INTEGER, primary_key=True)
