@@ -36,3 +36,30 @@ class ForbiddenError(HttpError):
         super().__init__(msg, {})
         self.message = msg
         self.error_dict = {}
+
+
+class NotFoundError(HttpError):
+    status_code = 403
+
+    def __int__(self, msg="Not Found Error"):
+        super().__init__(msg, {})
+        self.message = msg
+        self.error_dict = {}
+
+
+class RateLimitError(HttpError):
+    status_code = 429
+
+    def __int__(self, msg="About To Hit Rate Limit"):
+        super().__init__(msg, {})
+        self.message = msg
+        self.error_dict = {}
+
+
+class SQLAlchemyIntegrityError(HttpError):
+    status_code = 429
+
+    def __int__(self, msg="A Database Error Occurred Due To A Bad Request"):
+        super().__init__(msg, {})
+        self.message = msg
+        self.error_dict = {}
