@@ -6,7 +6,7 @@
 2. Fast API
 3. SQLAlchemy
 4. Pydantic (to be added)
-5. Gunicorn
+5. Gunicorn and Uvicorn
 6. PostgreSQL
 7. Docker
 8. Google Cloud Platform (Build, Storage, Run)
