@@ -21,57 +21,41 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# todo: use async-await
-
 
 @app.get("/")
 def root():
+    """
+    todo:
+        1. use async-await
+        2. only allow requests from an iOS device
+        3. run uvicorn workers using gunicorn
+        4. check request signature, valid user_id, etc. to validate requests 
+    """
     return {"message": "welcome to af"}
 
 
 @app.put("/sign_up")
 def sign_up():
-    """
-    1. check signature
-    2. create user, af
-    3. return [200, ok]
-    """
-    return "not implemented yet"
+    return {"message": "not implemented yet"} 
 
 
 @app.get("/sign_in")
 def sign_in():
-    """
-    1. check signature, user_id, etc.
-    2. return [200, ok]
-    """
     return "not implemented yet"
 
 
 @app.get("/user")
 def user():
-    """
-    1. check signature, user_id, etc.
-    2. return user
-    """
     return "not implemented yet"
 
 
 @app.get("/af")
 def af():
-    """
-    1. check signature, user_id, etc.
-    2. return af
-    """
     return "not implemented yet"
 
 
 @app.get("/chat_history")
 def chat_history():
-    """
-    1. check signature, user_id, etc.
-    2. return chat history
-    """
     return "not implemented yet"
 
 
@@ -82,19 +66,9 @@ def chat(prompt: str):
 
 @app.get("/event")
 def get_event():
-    """
-    1. check signature, user_id, event_id, etc.
-    2. query events
-    3. return events
-    """
     return "not implemented yet"
 
 
 @app.put("/event")
 def create_event():
-    """
-    1. check signature, user_id, etc.
-    2. insert event
-    3. return [200, ok]
-    """
     return "not implemented yet"
