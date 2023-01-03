@@ -10,6 +10,10 @@
 6. PostgreSQL
 7. Docker
 8. Google Cloud Platform (Build, Storage, Run)
+9. Transformers
+   1. GPT-3
+   2. Galactica (soon)
+   3. Embedding (soon)
 
 
 ## Local
