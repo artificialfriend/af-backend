@@ -1,6 +1,7 @@
-from sqlalchemy import (Column, func, Sequence, Integer, ForeignKey, CheckConstraint, UniqueConstraint, Index)
+from sqlalchemy import (Column, func)
 from sqlalchemy.dialects.postgresql import VARCHAR, TIMESTAMP, INTEGER, BOOLEAN
 from metadata_db_constants import Base
+from schema.chat import Chat
 
 
 class ChatTable(Base):
@@ -13,11 +14,11 @@ class ChatTable(Base):
     is_response = Column(BOOLEAN, nullable=False)
     created_at = Column(TIMESTAMP, nullable=False, server_default=func.current_timestamp())
 
-    def __init__(self, user_id, text, is_prompt):
-        self.user_id = user_id
-        self.text = text
-        self.is_prompt = is_prompt
-        self.is_response = not is_prompt
+    def __init__(self, chat: Chat):
+        self.user_id = chat.user_id
+        self.text = chat.text
+        self.is_prompt = chat.is_prompt
+        self.is_response = not chat.is_prompt
 
     def __repr__(self):
         return "<Chat(id={self.id!r})>".format(self=self)

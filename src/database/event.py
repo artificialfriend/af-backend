@@ -1,6 +1,8 @@
-from sqlalchemy import (Column, func, Sequence, Integer, ForeignKey, CheckConstraint, UniqueConstraint, Index)
-from sqlalchemy.dialects.postgresql import VARCHAR, TIMESTAMP, INTEGER, BOOLEAN
+from sqlalchemy import (Column, func, Date)
+from sqlalchemy.dialects.postgresql import VARCHAR, TIMESTAMP, INTEGER
 from metadata_db_constants import Base
+from schema.event import Event
+from schema.user import User
 
 
 class EventTable(Base):
@@ -12,18 +14,18 @@ class EventTable(Base):
     course = Column(VARCHAR, nullable=False)
     status = Column(INTEGER, nullable=False)
     priority = Column(INTEGER, nullable=False)
-    due_date = Column(TIMESTAMP, nullable=False)
+    due_date = Column(Date, nullable=False)
     created_at = Column(TIMESTAMP, nullable=False, server_default=func.current_timestamp())
     updated_at = Column(TIMESTAMP, nullable=False, server_default=func.current_timestamp(),
                         onupdate=func.current_timestamp())
 
-    def __init__(self, user_id, name, course, status, priority, due_date):
-        self.user_id = user_id
-        self.name = name
-        self.course = course
-        self.status = status
-        self.priority = priority
-        self.due_date = due_date  # todo validate birth_date is a timestamp
+    def __init__(self, user: User, event: Event):
+        self.user_id = user.user_id
+        self.name = event.name
+        self.course = event.course
+        self.due_date = event.due_date.date()
+        self.status = event.status.value
+        self.priority = event.priority.value
 
     def __repr__(self):
         return "<Chat(id={self.id!r})>".format(self=self)
