@@ -28,4 +28,4 @@ class EventTable(Base):
         self.priority = event.priority.value
 
     def __repr__(self):
-        return "<Chat(id={self.id!r})>".format(self=self)
+        return "<Event(id={self.id!r})>".format(self=self)

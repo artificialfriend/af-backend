@@ -22,7 +22,7 @@ class AFTable(Base):
         pass
 
     def __repr__(self):
-        return "<Chat(id={self.id!r})>".format(self=self)
+        return "<AF(id={self.id!r})>".format(self=self)
 
 
 def insert(af: AF):
