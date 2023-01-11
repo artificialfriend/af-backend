@@ -8,16 +8,16 @@ class UserTable(Base):
     __tablename__ = "users"
 
     user_id = Column(INTEGER, primary_key=True)
+    af_id = Column(INTEGER, ForeignKey("afs.af_id"), nullable=False)
     first_name = Column(VARCHAR, nullable=False)
     last_name = Column(VARCHAR, nullable=False)
     user_name = Column(VARCHAR, nullable=False, unique=True)
     birth_date = Column(Date, nullable=False)
-    af_id = Column(INTEGER, ForeignKey("af.af_id"), nullable=False)
     created_at = Column(TIMESTAMP, nullable=False, server_default=func.current_timestamp())
     updated_at = Column(TIMESTAMP, nullable=False, server_default=func.current_timestamp(),
                         onupdate=func.current_timestamp())
 
-    __table_args__ = (UniqueConstraint("user_name"))
+    __table_args__ = (UniqueConstraint("user_name"),)
 
     def __init__(self, user: User):
         self.first_name = user.first_name
