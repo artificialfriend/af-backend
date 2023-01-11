@@ -9,11 +9,12 @@
 5. Gunicorn and Uvicorn
 6. PostgreSQL
 7. Docker
-8. Google Cloud Platform (Build, Storage, Run)
+8. Google Cloud Platform (build, storage, run)
 9. Transformers
    1. GPT-3
    2. Galactica (soon)
    3. Embedding (soon)
+10. Alembic (database schema updates)
 
 
 ## Local
