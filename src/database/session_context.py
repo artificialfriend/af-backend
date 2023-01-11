@@ -6,7 +6,7 @@ from util.exceptions import HttpError, BadRequestError, SQLAlchemyIntegrityError
 
 
 @contextmanager
-def session_scope(session):
+def session_context(session):
     try:
         yield session
         session.commit()

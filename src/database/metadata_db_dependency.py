@@ -34,6 +34,9 @@ class MetadataDbDependency:
                 finally:
                     connection.execute(f"select pg_advisory_unlock({PG_ADVISORY_LOCK_METADATA_DB})")
 
+    def get_session(self):
+        return self.session
+
     def stop(self):
         pass
 
