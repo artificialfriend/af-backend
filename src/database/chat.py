@@ -1,5 +1,6 @@
-from sqlalchemy import (Column, func)
+from sqlalchemy import (Column, func, ForeignKey)
 from sqlalchemy.dialects.postgresql import VARCHAR, TIMESTAMP, INTEGER, BOOLEAN
+
 from metadata_db_constants import Base
 from schema.chat import Chat
 
@@ -7,8 +8,8 @@ from schema.chat import Chat
 class ChatTable(Base):
     __tablename__ = "chats"
 
-    id = Column(INTEGER, primary_key=True)
-    user_id = Column(INTEGER, ForeignKey="users.id", nullable=False)
+    chat_id = Column(INTEGER, primary_key=True)
+    user_id = Column(INTEGER, ForeignKey("users.user_id"), nullable=False)
     text = Column(VARCHAR, nullable=False)
     is_prompt = Column(BOOLEAN, nullable=False)
     is_response = Column(BOOLEAN, nullable=False)
