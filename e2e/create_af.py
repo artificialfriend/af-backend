@@ -1,0 +1,42 @@
+from database.af import insert
+from database.metadata_db_dependency import MetadataDbDependency
+from database.session_context import session_context
+from schema.af import AF
+
+
+def get_metadata_db_dependency():
+    metadata_db_dependency = MetadataDbDependency()
+    return metadata_db_dependency
+
+
+def create_af(metadata_db_dependency):
+    af_dict = {
+        "name": "Klara",
+        "skin_color": "Caramel",
+        "freckles": "Few",
+        "hair_color": "White",
+        "hair_style": "Wavy",
+        "eye_color": "Hazel",
+        "eye_lashes": "Straight",
+        "bubble_color": "Blue",
+    }
+
+    af = AF(**af_dict)
+    print(af)
+    print(af.dict())
+
+    with session_context(metadata_db_dependency.get_session()) as session:
+        insert(session=session, af=af)
+
+    print("closing session")
+
+
+def run():
+    metadata_db_dependency = get_metadata_db_dependency()
+    create_af(metadata_db_dependency)
+
+
+if __name__ == '__main__':
+    run()
+
+

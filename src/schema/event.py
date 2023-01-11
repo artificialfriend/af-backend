@@ -15,10 +15,15 @@ class EventStatus(Enum):
     Done = "Done"
 
 
+class EventType(Enum):
+    Essay = "Essay"
+
+
 class Event(BaseModel):
     name: str
     due_date: datetime
     course: str
+    event_type: EventType
     priority: EventPriority
     status: EventStatus
 
@@ -26,13 +31,16 @@ class Event(BaseModel):
         return self.dict()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     event_dict = {
         "name": "write an essay on Aegon's ascend",
         "due_date": "2023-01-03 1:10",
         "course": "literature",
+        "event_type": "Essay",
         "priority": "Medium",
-        "status": "Done"
+        "status": "Done",
     }
 
     event = Event(**event_dict)
+
+    print(event)

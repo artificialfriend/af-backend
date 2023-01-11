@@ -13,9 +13,7 @@ origins = [
     "http://localhost:8080",
 ]
 
-headers = {
-    "Content-Type": "application/json"
-}
+headers = {"Content-Type": "application/json"}
 
 app.add_middleware(
     CORSMiddleware,
@@ -36,7 +34,7 @@ def root():
 
 @app.put("/sign_up")
 def sign_up(user: User):
-    return {"message": "not implemented yet"} 
+    return {"message": "not implemented yet"}
 
 
 @app.get("/sign_in")

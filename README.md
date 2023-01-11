@@ -14,8 +14,10 @@
    1. GPT-3
    2. Galactica (soon)
    3. Embedding (soon)
-10. Alembic (database schema updates) (soon)
-
+10. Alembic (database schema updates)
+11. Lint
+    1. PyLint [![linting: pylint](https://img.shields.io/badge/linting-pylint-yellowgreen)](https://github.com/PyCQA/pylint)
+    2. Black
 
 ## Local
 
@@ -30,3 +32,5 @@ docker build -t af-backend:latest .
 ```commandline
 docker run -p 80:80 af-backend:latest
 ```
+
+

@@ -14,7 +14,7 @@ class User(BaseModel):
         return self.dict()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     user_dict = {
         "user_id": "1",
         "first_name": "Aegon",
@@ -22,7 +22,7 @@ if __name__ == '__main__':
         "user_name": "JonSnow",
         "birth_date": "2005-05-01 1:10",
         "af_id": "5",
-        "key": "value"
+        "key": "value",
     }
 
     user = User(**user_dict)

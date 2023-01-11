@@ -1,23 +1,30 @@
-from sqlalchemy import (Column, func, Date, ForeignKey)
+from sqlalchemy import Column, func, Date, ForeignKey
 from sqlalchemy.dialects.postgresql import VARCHAR, TIMESTAMP, INTEGER
 from metadata_db_constants import Base
 from schema.event import Event
 from schema.user import User
 
 
-class EventTable(Base):
-    __tablename__ = "events"
+class EventRecord(Base):
+    __tablename__ = "event"
 
     event_id = Column(INTEGER, primary_key=True)
-    user_id = Column(INTEGER, ForeignKey("users.user_id"), nullable=False)
+    user_id = Column(INTEGER, ForeignKey("user.user_id"), nullable=False)
+    event_type = Column(VARCHAR, nullable=False)
     name = Column(VARCHAR, nullable=False)
     course = Column(VARCHAR, nullable=False)
-    status = Column(INTEGER, nullable=False)
-    priority = Column(INTEGER, nullable=False)
+    status = Column(VARCHAR, nullable=False)
+    priority = Column(VARCHAR, nullable=False)
     due_date = Column(Date, nullable=False)
-    created_at = Column(TIMESTAMP, nullable=False, server_default=func.current_timestamp())
-    updated_at = Column(TIMESTAMP, nullable=False, server_default=func.current_timestamp(),
-                        onupdate=func.current_timestamp())
+    created_at = Column(
+        TIMESTAMP, nullable=False, server_default=func.current_timestamp()
+    )
+    updated_at = Column(
+        TIMESTAMP,
+        nullable=False,
+        server_default=func.current_timestamp(),
+        onupdate=func.current_timestamp(),
+    )
 
     def __init__(self, user: User, event: Event):
         self.user_id = user.user_id
@@ -28,4 +35,4 @@ class EventTable(Base):
         self.priority = event.priority.value
 
     def __repr__(self):
-        return "<Event(id={self.id!r})>".format(self=self)
+        return "<EventRecord(id={self.id!r})>".format(self=self)

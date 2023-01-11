@@ -57,7 +57,7 @@ class AF(BaseModel):
         return self.dict()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     af_dict = {
         "name": "Klara",
         "skin_color": "Caramel",
@@ -66,7 +66,7 @@ if __name__ == '__main__':
         "hair_style": "Wavy",
         "eye_color": "Hazel",
         "eye_lashes": "Straight",
-        "bubble_color": "Blue"
+        "bubble_color": "Blue",
     }
 
     af = AF(**af_dict)

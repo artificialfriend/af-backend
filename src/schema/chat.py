@@ -11,12 +11,12 @@ class Chat(BaseModel):
         return self.dict()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     chat_dict = {
         "user_id": "1",
         "text": "Hello",
         "is_prompt": True,
-        "is_response": False
+        "is_response": False,
     }
 
     chat = Chat(**chat_dict)

@@ -1,19 +1,21 @@
-from sqlalchemy import (Column, func, ForeignKey)
+from sqlalchemy import Column, func, ForeignKey
 from sqlalchemy.dialects.postgresql import VARCHAR, TIMESTAMP, INTEGER, BOOLEAN
 
 from metadata_db_constants import Base
 from schema.chat import Chat
 
 
-class ChatTable(Base):
-    __tablename__ = "chats"
+class ChatRecord(Base):
+    __tablename__ = "chat"
 
     chat_id = Column(INTEGER, primary_key=True)
-    user_id = Column(INTEGER, ForeignKey("users.user_id"), nullable=False)
+    user_id = Column(INTEGER, ForeignKey("user.user_id"), nullable=False)
     text = Column(VARCHAR, nullable=False)
     is_prompt = Column(BOOLEAN, nullable=False)
     is_response = Column(BOOLEAN, nullable=False)
-    created_at = Column(TIMESTAMP, nullable=False, server_default=func.current_timestamp())
+    created_at = Column(
+        TIMESTAMP, nullable=False, server_default=func.current_timestamp()
+    )
 
     def __init__(self, chat: Chat):
         self.user_id = chat.user_id
@@ -22,4 +24,24 @@ class ChatTable(Base):
         self.is_response = not chat.is_prompt
 
     def __repr__(self):
-        return "<Chat(id={self.id!r})>".format(self=self)
+        return "<ChatRecord(id={self.id!r})>".format(self=self)
+
+
+def insert(session, chat: Chat):
+    session.add(chat)
+
+
+def find(session, chat: Chat):
+    pass
+
+
+def update(session, chat: Chat):
+    pass
+
+
+def delete(session, chat: Chat):
+    pass
+
+
+def upsert(session, chat: Chat):
+    pass

@@ -12,7 +12,9 @@ def extract_text(response):
         raise RuntimeError("Something Went Wrong")
 
 
-def send_request(prompt, model, temperature, max_tokens, top_p, frequency_penalty, presence_penalty):
+def send_request(
+    prompt, model, temperature, max_tokens, top_p, frequency_penalty, presence_penalty
+):
     response = openai.Completion.create(
         model=model,
         prompt=prompt,
@@ -20,14 +22,14 @@ def send_request(prompt, model, temperature, max_tokens, top_p, frequency_penalt
         max_tokens=max_tokens,
         top_p=top_p,
         frequency_penalty=frequency_penalty,
-        presence_penalty=presence_penalty
+        presence_penalty=presence_penalty,
     )
     return response
 
 
 def generate_essay(prompt):
     """
-        Example Prompt: "Create an outline for an essay about Nikola Tesla and his contributions to technology:"
+    Example Prompt: "Create an outline for an essay about Nikola Tesla and his contributions to technology:"
     """
     model_parameters = {
         "model": "text-davinci-003",
@@ -35,7 +37,7 @@ def generate_essay(prompt):
         "max_tokens": 150,
         "top_p": 1.0,
         "frequency_penalty": 0.0,
-        "presence_penalty": 0.0
+        "presence_penalty": 0.0,
     }
     response = send_request(prompt, **model_parameters)
     print(response)
