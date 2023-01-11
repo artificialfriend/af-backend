@@ -3,8 +3,8 @@ import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from metadata_db_constants import Base, PG_ADVISORY_LOCK_METADATA_DB, CONNECTION_URL
-from database import user  # noqa
+from metadata_db_constants import Base, CONNECTION_URL, PG_ADVISORY_LOCK_METADATA_DB
+from database import af, chat, event, user  # noqa
 
 
 def create_metadata_db_engine():
@@ -32,7 +32,7 @@ class MetadataDbDependency:
                 try:
                     Base.metadata.create_all(self.engine)
                 finally:
-                    connection.execute(f"select pg_try_advisory_unlock({PG_ADVISORY_LOCK_METADATA_DB})")
+                    connection.execute(f"select pg_advisory_unlock({PG_ADVISORY_LOCK_METADATA_DB})")
 
     def stop(self):
         pass

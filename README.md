@@ -5,7 +5,7 @@
 1. Python 3.11
 2. Fast API
 3. SQLAlchemy
-4. Pydantic (to be added)
+4. Pydantic
 5. Gunicorn and Uvicorn
 6. PostgreSQL
 7. Docker
@@ -14,7 +14,7 @@
    1. GPT-3
    2. Galactica (soon)
    3. Embedding (soon)
-10. Alembic (database schema updates)
+10. Alembic (database schema updates) (soon)
 
 
 ## Local
