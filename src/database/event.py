@@ -1,4 +1,4 @@
-from sqlalchemy import (Column, func, Date)
+from sqlalchemy import (Column, func, Date, ForeignKey)
 from sqlalchemy.dialects.postgresql import VARCHAR, TIMESTAMP, INTEGER
 from metadata_db_constants import Base
 from schema.event import Event
@@ -9,7 +9,7 @@ class EventTable(Base):
     __tablename__ = "events"
 
     event_id = Column(INTEGER, primary_key=True)
-    user_id = Column(INTEGER, ForeignKey="users.id", nullable=False)
+    user_id = Column(INTEGER, ForeignKey("users.user_id"), nullable=False)
     name = Column(VARCHAR, nullable=False)
     course = Column(VARCHAR, nullable=False)
     status = Column(INTEGER, nullable=False)
