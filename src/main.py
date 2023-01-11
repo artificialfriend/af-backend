@@ -1,6 +1,10 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pretrained_transformer.gpt3 import generate_essay
+from src.schema.af import AF
+from src.schema.chat import Chat
+from src.schema.event import Event
+from src.schema.user import User
 
 app = FastAPI()
 
@@ -24,51 +28,47 @@ app.add_middleware(
 
 @app.get("/")
 def root():
-    """
-    todo:
-        1. use async-await
-        2. only allow requests from an iOS device
-        3. run uvicorn workers using gunicorn
-        4. check request signature, valid user_id, etc. to validate requests 
-    """
+    # todo: only allow requests from an iOS device
+    # todo: check request signature, valid user_id, etc. to validate reques
+    # todo: use async-await
     return {"message": "welcome to af"}
 
 
 @app.put("/sign_up")
-def sign_up():
+def sign_up(user: User):
     return {"message": "not implemented yet"} 
 
 
 @app.get("/sign_in")
-def sign_in():
-    return "not implemented yet"
+def sign_in(user: User):
+    return {"message": "not implemented yet"}
 
 
 @app.get("/user")
-def user():
-    return "not implemented yet"
+def user(user: User):
+    return {"message": "not implemented yet"}
 
 
-@app.get("/af")
-def af():
-    return "not implemented yet"
+@app.put("/af")
+def af(af: AF):
+    return {"message": "not implemented yet"}
+
+
+@app.post("/chat")
+def chat(chat: Chat):
+    return generate_essay(chat.text)
 
 
 @app.get("/chat_history")
 def chat_history():
-    return "not implemented yet"
+    return {"message": "not implemented yet"}
 
 
-@app.post("/chat")
-def chat(prompt: str):
-    return generate_essay(prompt)
-
-
-@app.get("/event")
-def get_event():
-    return "not implemented yet"
+@app.get("/events")
+def get_event(user: User):
+    return {"message": "not implemented yet"}
 
 
 @app.put("/event")
-def create_event():
-    return "not implemented yet"
+def create_event(event: Event):
+    return {"message": "not implemented yet"}
