@@ -23,3 +23,15 @@ class AFTable(Base):
 
     def __repr__(self):
         return "<Chat(id={self.id!r})>".format(self=self)
+
+
+def insert(af: AF):
+    pass
+
+
+def update(af: AF):
+    pass
+
+
+def delete(af: AF):
+    pass
