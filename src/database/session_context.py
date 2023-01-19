@@ -2,7 +2,11 @@ import logging
 from contextlib import contextmanager
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 
-from util.exception_util import HttpError, BadRequestError, SQLAlchemyIntegrityError
+from util.exception_util import (
+    HttpError,
+    BadRequestError,
+    SQLAlchemyIntegrityError,
+)
 
 
 @contextmanager

@@ -3,7 +3,11 @@ import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from metadata_db_constants import Base, CONNECTION_URL, PG_ADVISORY_LOCK_METADATA_DB
+from metadata_db_constants import (
+    Base,
+    CONNECTION_URL,
+    PG_ADVISORY_LOCK_METADATA_DB,
+)
 from database import af, chat, event, user  # noqa
 
 
