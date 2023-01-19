@@ -3,7 +3,6 @@ from sqlalchemy import Column, func, Date, ForeignKey, UniqueConstraint
 from sqlalchemy.dialects.postgresql import VARCHAR, TIMESTAMP, INTEGER
 from metadata_db_constants import Base
 from schema.user import User
-from util.dict_util import to_dict
 
 
 class UserRecord(Base):
@@ -27,31 +26,25 @@ class UserRecord(Base):
 
     __table_args__ = (UniqueConstraint("user_name"),)
 
-    def __init__(
-        self,
-        af_id: str,
-        first_name: str,
-        last_name: str,
-        user_name: str,
-        birth_date: datetime
-    ):
-        self.af_id = af_id
-        self.first_name = first_name
-        self.last_name = last_name
-        self.user_name = user_name
-        self.birth_date = birth_date.date()
+    def __init__(self, user: User):
+        self.af_id = user.af_id
+        self.first_name = user.first_name
+        self.last_name = user.last_name
+        self.user_name = user.user_name
+        self.birth_date = user.birth_date.date()
 
     def __repr__(self):
         return "<UserRecord(id={self.id!r})>".format(self=self)
 
 
 def insert(session, user: User):
-    session.add(UserRecord(user.af_id, user.first_name, user.last_name, user.user_name, user.birth_date))
+    session.add(UserRecord(user))
+    # session.add(UserRecord(user.af_id, user.first_name, user.last_name, user.user_name, user.birth_date))
 
 
-def find_by_id(session, user_id: str):
+def find_by_id(session, user_id: str) -> User:
     pass
 
 
-def find_by_name(session, user_name: str):
+def find_by_name(session, user_name: str) -> User:
     pass

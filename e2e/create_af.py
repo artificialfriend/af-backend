@@ -11,7 +11,7 @@ def get_metadata_db_dependency():
 
 def create_af_object():
     af_dict = {
-        "name": "Klara",
+        "name": "Klara3",
         "skin_color": "Caramel",
         "freckles": "Few",
         "hair_color": "White",

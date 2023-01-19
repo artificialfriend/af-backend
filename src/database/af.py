@@ -2,7 +2,6 @@ from sqlalchemy import Column, func
 from sqlalchemy.dialects.postgresql import VARCHAR, TIMESTAMP, INTEGER
 from metadata_db_constants import Base
 from schema.af import AF
-from util.dict_util import to_dict
 
 
 class AFRecord(Base):
@@ -21,30 +20,20 @@ class AFRecord(Base):
         TIMESTAMP, nullable=False, server_default=func.current_timestamp()
     )
 
-    def __init__(
-        self,
-        name: str,
-        skin_color: str,
-        freckles: str,
-        hair_color: str,
-        hair_style: str,
-        eye_color: str,
-        eye_lashes: str,
-        bubble_color: str,
-    ):
+    def __init__(self, af: AF):
 
-        self.name = name
-        self.skin_color = skin_color
-        self.freckles = freckles
-        self.hair_color = hair_color
-        self.hair_style = hair_style
-        self.eye_color = eye_color
-        self.eye_lashes = eye_lashes
-        self.bubble_color = bubble_color
+        self.name = af.name
+        self.skin_color = af.skin_color.value
+        self.freckles = af.freckles.value
+        self.hair_color = af.hair_color.value
+        self.hair_style = af.hair_style.value
+        self.eye_color = af.eye_color.value
+        self.eye_lashes = af.eye_lashes.value
+        self.bubble_color = af.bubble_color.value
 
     def __repr__(self):
         return "<AFRecord(id={self.id!r})>".format(self=self)
 
 
 def insert(session, af: AF):
-    session.add(AFRecord(**to_dict(af)))
+    session.add(AFRecord(af))

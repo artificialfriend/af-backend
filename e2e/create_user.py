@@ -15,7 +15,7 @@ def create_user_object():
         "first_name": "Rob",
         "last_name": "Stark",
         "user_name": "Wolf",
-        "birth_date": "2005-05-01 1:10"
+        "birth_date": "2005-05-01 1:10",
     }
     user = User(**user_dict)
     return user
