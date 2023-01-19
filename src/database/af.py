@@ -20,8 +20,17 @@ class AFRecord(Base):
         TIMESTAMP, nullable=False, server_default=func.current_timestamp()
     )
 
-    def __init__(self, name: str, skin_color: str, freckles: str, hair_color: str, hair_style: str,
-                 eye_color: str, eye_lashes: str, bubble_color: str):
+    def __init__(
+        self,
+        name: str,
+        skin_color: str,
+        freckles: str,
+        hair_color: str,
+        hair_style: str,
+        eye_color: str,
+        eye_lashes: str,
+        bubble_color: str,
+    ):
 
         self.name = name
         self.skin_color = skin_color
