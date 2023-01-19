@@ -12,7 +12,10 @@ CURRENT_ALEMBIC_VERSION = "66f31d3af472"
 
 def create_metadata_db_engine():
     connection_url = CONNECTION_URL.format(
-        os.getenv("USER"), os.getenv("PASSWORD"), os.getenv("HOST"), os.getenv("PORT")
+        os.getenv("DB_USER"),
+        os.getenv("DB_PASSWORD"),
+        os.getenv("DB_HOST"),
+        os.getenv("DB_PORT"),
     )
     engine = create_engine(connection_url, echo=True)
     return engine

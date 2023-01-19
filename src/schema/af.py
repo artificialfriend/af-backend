@@ -61,20 +61,3 @@ class AF(BaseModel):
             else:
                 d[k] = v
         return d
-
-
-if __name__ == "__main__":
-    af_dict = {
-        "name": "Klara",
-        "skin_color": "Caramel",
-        "freckles": "Few",
-        "hair_color": "White",
-        "hair_style": "Wavy",
-        "eye_color": "Hazel",
-        "eye_lashes": "Straight",
-        "bubble_color": "Blue",
-    }
-
-    af = AF(**af_dict)
-
-    print(af.to_dict())

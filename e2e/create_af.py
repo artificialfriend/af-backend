@@ -9,7 +9,7 @@ def get_metadata_db_dependency():
     return metadata_db_dependency
 
 
-def create_af(metadata_db_dependency):
+def create_af_object():
     af_dict = {
         "name": "Klara",
         "skin_color": "Caramel",
@@ -22,9 +22,11 @@ def create_af(metadata_db_dependency):
     }
 
     af = AF(**af_dict)
-    print(af)
-    print(af.dict())
+    return af
 
+
+def create_af_record(metadata_db_dependency):
+    af = create_af_object()
     with session_context(metadata_db_dependency.get_session()) as session:
         insert(session=session, af=af)
 
@@ -33,10 +35,8 @@ def create_af(metadata_db_dependency):
 
 def run():
     metadata_db_dependency = get_metadata_db_dependency()
-    create_af(metadata_db_dependency)
+    create_af_record(metadata_db_dependency)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     run()
-
-
