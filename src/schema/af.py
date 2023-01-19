@@ -54,7 +54,13 @@ class AF(BaseModel):
     bubble_color: BubbleColor
 
     def to_dict(self):
-        return self.dict()
+        d = {}
+        for k, v in self.dict().items():
+            if hasattr(v, "value"):
+                d[k] = v.value
+            else:
+                d[k] = v
+        return d
 
 
 if __name__ == "__main__":
@@ -71,4 +77,4 @@ if __name__ == "__main__":
 
     af = AF(**af_dict)
 
-    print(af)
+    print(af.to_dict())
