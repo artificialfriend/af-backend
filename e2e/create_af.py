@@ -20,7 +20,6 @@ def create_af_object():
         "eye_lashes": "Straight",
         "bubble_color": "Blue",
     }
-
     af = AF(**af_dict)
     return af
 
@@ -29,7 +28,6 @@ def create_af_record(metadata_db_dependency):
     af = create_af_object()
     with session_context(metadata_db_dependency.get_session()) as session:
         insert(session=session, af=af)
-
     print("closing session")
 
 
