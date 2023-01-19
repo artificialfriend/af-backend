@@ -16,8 +16,7 @@
    3. Embedding (soon)
 10. Alembic (database schema updates)
 11. Lint
-    1. PyLint [![linting: pylint](https://img.shields.io/badge/linting-pylint-yellowgreen)](https://github.com/PyCQA/pylint)
-    2. Black
+    1. Black
 
 ## Local
 
