@@ -13,7 +13,13 @@ def extract_text(response):
 
 
 def send_request(
-    prompt, model, temperature, max_tokens, top_p, frequency_penalty, presence_penalty
+    prompt,
+    model,
+    temperature,
+    max_tokens,
+    top_p,
+    frequency_penalty,
+    presence_penalty,
 ):
     response = openai.Completion.create(
         model=model,
