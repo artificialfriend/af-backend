@@ -26,8 +26,9 @@ class EventRecord(Base):
         onupdate=func.current_timestamp(),
     )
 
-    def __init__(self, user: User, event: Event):
-        self.user_id = user.user_id
+    def __init__(self, event: Event):
+        self.user_id = event.user_id
+        self.event_type = event.event_type.value
         self.name = event.name
         self.course = event.course
         self.due_date = event.due_date.date()
@@ -36,3 +37,7 @@ class EventRecord(Base):
 
     def __repr__(self):
         return "<EventRecord(id={self.id!r})>".format(self=self)
+
+
+def insert(session, event: Event):
+    session.add(EventRecord(event))
