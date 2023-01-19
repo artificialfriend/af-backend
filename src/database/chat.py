@@ -1,3 +1,5 @@
+from typing import List
+
 from sqlalchemy import Column, func, ForeignKey
 from sqlalchemy.dialects.postgresql import VARCHAR, TIMESTAMP, INTEGER, BOOLEAN
 
@@ -28,20 +30,8 @@ class ChatRecord(Base):
 
 
 def insert(session, chat: Chat):
-    session.add(chat)
+    session.add(ChatRecord(chat))
 
 
-def find(session, chat: Chat):
-    pass
-
-
-def update(session, chat: Chat):
-    pass
-
-
-def delete(session, chat: Chat):
-    pass
-
-
-def upsert(session, chat: Chat):
+def find_all_by_user_id(session, user_id: str, offset: int, limit: int) -> List[Chat]:
     pass
