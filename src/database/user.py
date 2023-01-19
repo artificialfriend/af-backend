@@ -29,21 +29,29 @@ class UserRecord(Base):
 
     def __init__(
         self,
+        af_id: str,
         first_name: str,
         last_name: str,
         user_name: str,
-        birth_date: datetime,
-        af_id: str,
+        birth_date: datetime
     ):
+        self.af_id = af_id
         self.first_name = first_name
         self.last_name = last_name
         self.user_name = user_name
         self.birth_date = birth_date.date()
-        self.af_id = af_id
 
     def __repr__(self):
         return "<UserRecord(id={self.id!r})>".format(self=self)
 
 
 def insert(session, user: User):
-    session.add(UserRecord(**to_dict(user)))
+    session.add(UserRecord(user.af_id, user.first_name, user.last_name, user.user_name, user.birth_date))
+
+
+def find_by_id(session, user_id: str):
+    pass
+
+
+def find_by_name(session, user_name: str):
+    pass
