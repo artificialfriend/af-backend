@@ -52,12 +52,3 @@ class AF(BaseModel):
     eye_color: EyeColor
     eye_lashes: EyeLashes
     bubble_color: BubbleColor
-
-    def to_dict(self):
-        d = {}
-        for k, v in self.dict().items():
-            if hasattr(v, "value"):
-                d[k] = v.value
-            else:
-                d[k] = v
-        return d

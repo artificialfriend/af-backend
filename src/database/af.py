@@ -2,6 +2,7 @@ from sqlalchemy import Column, func
 from sqlalchemy.dialects.postgresql import VARCHAR, TIMESTAMP, INTEGER
 from metadata_db_constants import Base
 from schema.af import AF
+from util.dict_util import to_dict
 
 
 class AFRecord(Base):
@@ -46,12 +47,4 @@ class AFRecord(Base):
 
 
 def insert(session, af: AF):
-    session.add(AFRecord(**af.to_dict()))
-
-
-def update(session, af: AF):
-    pass
-
-
-def delete(session, af: AF):
-    pass
+    session.add(AFRecord(**to_dict(af)))
