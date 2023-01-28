@@ -16,8 +16,7 @@ def create_chat_object():
                 "decision-making. In particular, it can be used in sampling-based decision-making to help determine "
                 "the most likely outcome or reward. By using context from previous episodes, the system can make more "
                 "informed decisions, leading to better performance.",
-        "is_prompt": True,
-        "is_response": False,
+        "is_prompt": True
     }
     chat = Chat(**chat_dict)
     return chat
