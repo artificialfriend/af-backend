@@ -20,7 +20,7 @@ def send_request(
     top_p,
     frequency_penalty,
     presence_penalty,
-):
+) -> str:
     response = openai.Completion.create(
         model=model,
         prompt=prompt,
@@ -46,5 +46,4 @@ def generate_essay(prompt) -> str:
         "presence_penalty": 0.0,
     }
     response = send_request(prompt, **model_parameters)
-    print(response)
     return extract_text(response)
