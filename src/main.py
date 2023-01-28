@@ -1,10 +1,10 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pretrained_transformer.gpt3 import generate_essay
-from src.schema.af import AF
-from src.schema.chat import Chat
-from src.schema.event import Event
-from src.schema.user import User
+from schema.af import AF
+from schema.chat import Chat
+from schema.event import Event
+from schema.user import User
 
 app = FastAPI()
 
@@ -52,9 +52,10 @@ def af(af: AF):
     return {"message": "not implemented yet"}
 
 
-@app.post("/chat")
+@app.post("/chat/")
 def chat(chat: Chat):
-    return generate_essay(chat.text)
+    response = generate_essay(chat.text)
+    return {"response": response}
 
 
 @app.get("/chat_history")

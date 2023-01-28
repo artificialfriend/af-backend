@@ -33,7 +33,7 @@ def send_request(
     return response
 
 
-def generate_essay(prompt):
+def generate_essay(prompt) -> str:
     """
     Example Prompt: "Create an outline for an essay about Nikola Tesla and his contributions to technology:"
     """

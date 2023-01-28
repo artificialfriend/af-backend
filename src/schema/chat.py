@@ -5,4 +5,3 @@ class Chat(BaseModel):
     user_id: str
     text: str
     is_prompt: bool
-    is_response: bool
