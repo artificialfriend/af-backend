@@ -15,7 +15,6 @@ class AFRecord(Base):
     hair_style = Column(VARCHAR, nullable=False)
     eye_color = Column(VARCHAR, nullable=False)
     eye_lashes = Column(VARCHAR, nullable=False)
-    bubble_color = Column(VARCHAR, nullable=False)
     created_at = Column(
         TIMESTAMP, nullable=False, server_default=func.current_timestamp()
     )
@@ -29,7 +28,6 @@ class AFRecord(Base):
         self.hair_style = af.hair_style.value
         self.eye_color = af.eye_color.value
         self.eye_lashes = af.eye_lashes.value
-        self.bubble_color = af.bubble_color.value
 
     def __repr__(self):
         return "<AFRecord(id={self.id!r})>".format(self=self)

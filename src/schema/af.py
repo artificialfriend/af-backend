@@ -39,10 +39,6 @@ class EyeLashes(Enum):
     Straight = "Straight"
 
 
-class BubbleColor(Enum):
-    Blue = "Blue"
-
-
 class AF(BaseModel):
     name: str
     skin_color: SkinColor
@@ -51,4 +47,3 @@ class AF(BaseModel):
     hair_style: HairStyle
     eye_color: EyeColor
     eye_lashes: EyeLashes
-    bubble_color: BubbleColor

@@ -11,14 +11,13 @@ def get_metadata_db_dependency():
 
 def create_af_object():
     af_dict = {
-        "name": "Klara3",
+        "name": "Klara4",
         "skin_color": "Caramel",
         "freckles": "Few",
         "hair_color": "White",
         "hair_style": "Wavy",
         "eye_color": "Hazel",
-        "eye_lashes": "Straight",
-        "bubble_color": "Blue",
+        "eye_lashes": "Straight"
     }
     af = AF(**af_dict)
     return af
@@ -28,7 +27,6 @@ def create_af_record(metadata_db_dependency):
     af = create_af_object()
     with session_context(metadata_db_dependency.get_session()) as session:
         insert(session=session, af=af)
-    print("closing session")
 
 
 def run():
