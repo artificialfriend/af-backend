@@ -1,10 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pretrained_transformer.gpt3 import generate_essay
-from schema.af import AF
 from schema.chat import Chat
-from schema.event import Event
-from schema.user import User
 from util.string_util import remove_prefix
 
 app = FastAPI()
@@ -28,28 +25,23 @@ app.add_middleware(
 @app.get("/")
 def root():
     # todo: only allow requests from an iOS device
-    # todo: check request signature, valid user_id, etc. to validate reques
+    # todo: check request signature, valid user_id, etc. to validate request
     # todo: use async-await
     return {"message": "welcome to af"}
 
 
-@app.put("/sign_up")
-def sign_up(user: User):
+@app.put("/af")
+def af():
     return {"message": "not implemented yet"}
 
 
-@app.get("/sign_in")
-def sign_in(user: User):
+@app.put("/sign_up")
+def sign_up():
     return {"message": "not implemented yet"}
 
 
 @app.get("/user")
-def user(user: User):
-    return {"message": "not implemented yet"}
-
-
-@app.put("/af")
-def af(af: AF):
+def user():
     return {"message": "not implemented yet"}
 
 
@@ -62,14 +54,4 @@ def chat(chat: Chat):
 
 @app.get("/chat_history")
 def chat_history():
-    return {"message": "not implemented yet"}
-
-
-@app.get("/events")
-def get_event(user: User):
-    return {"message": "not implemented yet"}
-
-
-@app.put("/event")
-def create_event(event: Event):
     return {"message": "not implemented yet"}

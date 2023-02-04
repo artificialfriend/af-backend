@@ -20,7 +20,6 @@ class AFRecord(Base):
     )
 
     def __init__(self, af: AF):
-
         self.name = af.name
         self.skin_color = af.skin_color.value
         self.freckles = af.freckles.value

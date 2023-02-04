@@ -13,10 +13,10 @@ def create_chat_object():
     chat_dict = {
         "user_id": "1",
         "text": "Reinstated episodic context refers to the process of using past experiences to guide future "
-                "decision-making. In particular, it can be used in sampling-based decision-making to help determine "
-                "the most likely outcome or reward. By using context from previous episodes, the system can make more "
-                "informed decisions, leading to better performance.",
-        "is_prompt": False
+        "decision-making. In particular, it can be used in sampling-based decision-making to help determine "
+        "the most likely outcome or reward. By using context from previous episodes, the system can make more "
+        "informed decisions, leading to better performance.",
+        "is_prompt": False,
     }
     chat = Chat(**chat_dict)
     return chat
@@ -33,5 +33,5 @@ def run():
     create_chat(metadata_db_dependency)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     run()

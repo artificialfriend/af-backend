@@ -17,7 +17,7 @@ def create_af_object():
         "hair_color": "White",
         "hair_style": "Wavy",
         "eye_color": "Hazel",
-        "eye_lashes": "Straight"
+        "eye_lashes": "Straight",
     }
     af = AF(**af_dict)
     return af

@@ -8,10 +8,10 @@ from metadata_db_constants import (
     CONNECTION_URL,
     PG_ADVISORY_LOCK_METADATA_DB,
 )
-from database import af, chat, event, user  # noqa
+from database import af, chat, user  # noqa
 
 
-CURRENT_ALEMBIC_VERSION = "e38e852bd4f2"
+CURRENT_ALEMBIC_VERSION = "f69a172ef738"
 
 
 def create_metadata_db_engine():
