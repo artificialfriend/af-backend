@@ -27,7 +27,6 @@ def create_event(metadata_db_dependency):
     event = create_event_object()
     with session_context(metadata_db_dependency.get_session()) as session:
         insert(session=session, event=event)
-    print("closing session")
 
 
 def run():
