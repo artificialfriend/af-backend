@@ -5,6 +5,7 @@ from schema.af import AF
 from schema.chat import Chat
 from schema.event import Event
 from schema.user import User
+from util.string_util import remove_prefix
 
 app = FastAPI()
 
@@ -55,6 +56,7 @@ def af(af: AF):
 @app.post("/chat/")
 def chat(chat: Chat):
     response = generate_essay(chat.text)
+    response = remove_prefix(response)
     return {"response": response}
 
 

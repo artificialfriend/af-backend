@@ -16,7 +16,7 @@ def create_chat_object():
                 "decision-making. In particular, it can be used in sampling-based decision-making to help determine "
                 "the most likely outcome or reward. By using context from previous episodes, the system can make more "
                 "informed decisions, leading to better performance.",
-        "is_prompt": True
+        "is_prompt": False
     }
     chat = Chat(**chat_dict)
     return chat
@@ -26,7 +26,6 @@ def create_chat(metadata_db_dependency):
     chat = create_chat_object()
     with session_context(metadata_db_dependency.get_session()) as session:
         insert(session=session, chat=chat)
-    print("closing session")
 
 
 def run():

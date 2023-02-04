@@ -14,7 +14,6 @@ class ChatRecord(Base):
     user_id = Column(INTEGER, ForeignKey("user.user_id"), nullable=False)
     text = Column(VARCHAR, nullable=False)
     is_prompt = Column(BOOLEAN, nullable=False)
-    is_response = Column(BOOLEAN, nullable=False)
     created_at = Column(
         TIMESTAMP, nullable=False, server_default=func.current_timestamp()
     )
@@ -23,7 +22,6 @@ class ChatRecord(Base):
         self.user_id = chat.user_id
         self.text = chat.text
         self.is_prompt = chat.is_prompt
-        self.is_response = not chat.is_prompt
 
     def __repr__(self):
         return "<ChatRecord(id={self.id!r})>".format(self=self)
