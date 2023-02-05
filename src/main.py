@@ -1,7 +1,9 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pretrained_transformer.gpt3 import generate_essay
+from schema.af import AF
 from schema.chat import Chat
+from schema.user import User
 from util.string_util import remove_prefix
 
 app = FastAPI()
@@ -30,17 +32,19 @@ def root():
     return {"message": "welcome to af"}
 
 
-@app.put("/af")
+@app.put("/signup/")
+def sign_up(af: AF, user: User):
+    print(af)
+    print(user)
+    return {"message": "not implemented yet"}
+
+
+@app.get("/af/")
 def af():
     return {"message": "not implemented yet"}
 
 
-@app.put("/sign_up")
-def sign_up():
-    return {"message": "not implemented yet"}
-
-
-@app.get("/user")
+@app.get("/user/")
 def user():
     return {"message": "not implemented yet"}
 
@@ -50,8 +54,3 @@ def chat(chat: Chat):
     response = generate_essay(chat.text)
     response = remove_prefix(response)
     return {"response": response}
-
-
-@app.get("/chat_history")
-def chat_history():
-    return {"message": "not implemented yet"}
