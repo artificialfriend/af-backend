@@ -11,8 +11,8 @@ from sqlalchemy import text
 
 
 # revision identifiers, used by Alembic.
-revision = '1de9708ac399'
-down_revision = '68edbaa1f1e7'
+revision = "1de9708ac399"
+down_revision = "68edbaa1f1e7"
 branch_labels = None
 depends_on = None
 
@@ -32,7 +32,12 @@ def upgrade() -> None:
     op.alter_column("af", "hair_style", type_=sa.TEXT, existing_type=sa.VARCHAR)
     op.alter_column("af", "eye_color", type_=sa.TEXT, existing_type=sa.VARCHAR)
     op.alter_column("af", "eye_lashes", type_=sa.TEXT, existing_type=sa.VARCHAR)
-    op.add_column("af", sa.Column("updated_at", sa.Date, nullable=False, server_default=text('CURRENT_DATE')))
+    op.add_column(
+        "af",
+        sa.Column(
+            "updated_at", sa.Date, nullable=False, server_default=text("CURRENT_DATE")
+        ),
+    )
 
 
 def downgrade() -> None:
