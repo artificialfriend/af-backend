@@ -11,11 +11,12 @@ def get_metadata_db_dependency():
 
 def create_user_object():
     user_dict = {
-        "af_id": "2",
+        "user_id": "Wolf",
+        "af_id": "Klara#1",
+        "email": "klara@afinc.com",
         "first_name": "Rob",
         "last_name": "Stark",
-        "user_name": "Wolf",
-        "birth_date": "2005-05-01 1:10",
+        "birth_date": "2005-05-02 1:10",
     }
     user = User(**user_dict)
     return user
