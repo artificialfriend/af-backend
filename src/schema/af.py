@@ -1,4 +1,6 @@
 from enum import Enum
+from typing import Optional
+
 from pydantic import BaseModel
 
 
@@ -40,7 +42,7 @@ class EyeLashes(Enum):
 
 
 class AF(BaseModel):
-    name: str
+    af_id: str
     skin_color: SkinColor
     freckles: Freckles
     hair_color: HairColor
