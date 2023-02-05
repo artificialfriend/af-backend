@@ -11,7 +11,7 @@ def get_metadata_db_dependency():
 
 def create_chat_object():
     chat_dict = {
-        "user_id": "1",
+        "user_id": "Wolf",
         "text": "Reinstated episodic context refers to the process of using past experiences to guide future "
         "decision-making. In particular, it can be used in sampling-based decision-making to help determine "
         "the most likely outcome or reward. By using context from previous episodes, the system can make more "

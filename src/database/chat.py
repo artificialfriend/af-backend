@@ -1,6 +1,6 @@
 from typing import List
 
-from sqlalchemy import Column, func, ForeignKey
+from sqlalchemy import Column, func, ForeignKey, TEXT
 from sqlalchemy.dialects.postgresql import VARCHAR, TIMESTAMP, INTEGER, BOOLEAN
 
 from metadata_db_constants import Base
@@ -11,8 +11,8 @@ class ChatRecord(Base):
     __tablename__ = "chat"
 
     chat_id = Column(INTEGER, primary_key=True)
-    user_id = Column(INTEGER, ForeignKey("user.user_id"), nullable=False)
-    text = Column(VARCHAR, nullable=False)
+    user_id = Column(TEXT, ForeignKey("user.user_id"), nullable=False)
+    text = Column(TEXT, nullable=False)
     is_prompt = Column(BOOLEAN, nullable=False)
     created_at = Column(
         TIMESTAMP, nullable=False, server_default=func.current_timestamp()
