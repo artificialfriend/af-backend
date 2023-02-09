@@ -34,8 +34,10 @@ def root():
 
 @app.put("/signup/")
 def sign_up(af: AF, user: User):
-    print(af)
-    print(user)
+    try:
+        pass
+    except Exception:
+        pass
     return {"message": "not implemented yet"}
 
 
