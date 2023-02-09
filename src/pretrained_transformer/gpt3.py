@@ -1,10 +1,15 @@
 import os
 import openai
-
+from tenacity import (
+    retry,
+    stop_after_attempt,
+    wait_random_exponential,
+)
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 
+@retry(wait=wait_random_exponential(min=1, max=60), stop=stop_after_attempt(5))
 def extract_text(response):
     if "choices" in response and len(response["choices"]) > 0:
         return response["choices"][0]["text"]
