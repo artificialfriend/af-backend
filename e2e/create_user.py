@@ -1,6 +1,6 @@
 from database.metadata_db_dependency import MetadataDbDependency
 from database.session_context import session_context
-from database.user import insert
+from database.user import UserRecord
 from schema.user import User
 
 
@@ -25,7 +25,7 @@ def create_user_object():
 def create_user(metadata_db_dependency):
     user = create_user_object()
     with session_context(metadata_db_dependency.get_session()) as session:
-        insert(session=session, user=user)
+        session.add(UserRecord(user))
 
 
 def run():

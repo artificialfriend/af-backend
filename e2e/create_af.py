@@ -1,4 +1,4 @@
-from database.af import insert
+from database.af import AFRecord
 from database.metadata_db_dependency import MetadataDbDependency
 from database.session_context import session_context
 from schema.af import AF
@@ -26,7 +26,7 @@ def create_af_object():
 def create_af_record(metadata_db_dependency):
     af = create_af_object()
     with session_context(metadata_db_dependency.get_session()) as session:
-        insert(session=session, af=af)
+        session.add(AFRecord(af))
 
 
 def run():
