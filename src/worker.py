@@ -56,7 +56,7 @@ def store_af_and_user(metadata_db_dependency, af: AF, user: User):
 
         af_record = session.query(AFRecord).filter(AFRecord.af_id == af.af_id).first()
         if af_record is not None:
-            raise HTTPException(status_code=400, detail="user already exists")
+            raise HTTPException(status_code=400, detail="af already exists")
 
         session.add(AFRecord(af))
         session.add(UserRecord(user))
