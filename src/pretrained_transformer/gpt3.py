@@ -38,10 +38,7 @@ def send_request(
     return response
 
 
-def generate_essay(prompt) -> str:
-    """
-    Example Prompt: "Create an outline for an essay about Nikola Tesla and his contributions to technology:"
-    """
+def get_gpt_response(prompt) -> str:
     model_parameters = {
         "model": "text-davinci-003",
         "temperature": 0.3,
