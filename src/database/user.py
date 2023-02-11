@@ -1,7 +1,8 @@
-from datetime import datetime
 from sqlalchemy import Column, func, Date, ForeignKey, UniqueConstraint, TEXT
-from sqlalchemy.dialects.postgresql import VARCHAR, TIMESTAMP, INTEGER
-from metadata_db_constants import Base
+from sqlalchemy.dialects.postgresql import TIMESTAMP
+from sqlalchemy.orm import Session
+
+from database.metadata_db_constants import Base
 from schema.user import User
 
 
@@ -36,7 +37,3 @@ class UserRecord(Base):
 
     def __repr__(self):
         return "<UserRecord(id={self.id!r})>".format(self=self)
-
-
-def insert(session, user: User):
-    session.add(UserRecord(user))
