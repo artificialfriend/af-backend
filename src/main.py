@@ -6,7 +6,7 @@ from database.metadata_db_dependency import MetadataDbDependency
 from schema.af import AF
 from schema.chat import Chat
 from schema.user import User
-from worker import process_chat
+from worker import process_chat, store_af_and_user
 
 app = FastAPI()
 
@@ -47,10 +47,10 @@ async def root():
 @app.put("/signup/")
 async def sign_up(af: AF, user: User):
     try:
-        pass
-    except Exception:
-        pass
-    return {"message": "not implemented yet"}
+        store_af_and_user(metadata_db_dependency=metadata_db_dependency, af=af, user=user)
+        return "ok"
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=e.__str__())
 
 
 @app.get("/af/")

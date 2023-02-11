@@ -1,10 +1,14 @@
 import logging
 from fastapi import HTTPException
+
+from database.af import AFRecord
 from database.chat import ChatRecord
 from database.session_context import session_context
 from database.user import UserRecord
 from pretrained_transformer.gpt3 import get_gpt_response
+from schema.af import AF
 from schema.chat import Chat
+from schema.user import User
 from util.string_util import remove_prefix
 
 logger = logging.getLogger(__name__)
@@ -37,3 +41,9 @@ def process_chat(metadata_db_dependency, user_chat: Chat):
     for chat_record in chat_records:
         last_two_chats.append(Chat.from_orm(chat_record))
     return last_two_chats
+
+
+def store_af_and_user(metadata_db_dependency, af: AF, user: User):
+    with session_context(metadata_db_dependency.get_session()) as session:
+        session.add(AFRecord(af))
+        session.add(UserRecord(user))
