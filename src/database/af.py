@@ -1,6 +1,6 @@
-from sqlalchemy import Column, func, ForeignKey, TEXT
-from sqlalchemy.dialects.postgresql import VARCHAR, TIMESTAMP, INTEGER
-from metadata_db_constants import Base
+from sqlalchemy import Column, func, TEXT
+from sqlalchemy.dialects.postgresql import TIMESTAMP, INTEGER
+from database.metadata_db_constants import Base
 from schema.af import AF
 
 
@@ -35,7 +35,3 @@ class AFRecord(Base):
 
     def __repr__(self):
         return "<AFRecord(id={self.id!r})>".format(self=self)
-
-
-def insert(session, af: AF):
-    session.add(AFRecord(af))
