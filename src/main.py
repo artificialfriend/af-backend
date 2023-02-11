@@ -1,10 +1,12 @@
-from fastapi import FastAPI
+import logging
+import traceback
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from pretrained_transformer.gpt3 import generate_essay
+from database.metadata_db_dependency import MetadataDbDependency
 from schema.af import AF
 from schema.chat import Chat
 from schema.user import User
-from util.string_util import remove_prefix
+from worker import process_chat
 
 app = FastAPI()
 
@@ -23,9 +25,19 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+logging.basicConfig(
+    level=logging.DEBUG,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    handlers=[logging.StreamHandler()],
+)
+
+logger = logging.getLogger(__name__)
+
+metadata_db_dependency = MetadataDbDependency()
+
 
 @app.get("/")
-def root():
+async def root():
     # todo: only allow requests from an iOS device
     # todo: check request signature, valid user_id, etc. to validate request
     # todo: use async-await
@@ -33,7 +45,7 @@ def root():
 
 
 @app.put("/signup/")
-def sign_up(af: AF, user: User):
+async def sign_up(af: AF, user: User):
     try:
         pass
     except Exception:
@@ -42,17 +54,21 @@ def sign_up(af: AF, user: User):
 
 
 @app.get("/af/")
-def af():
+async def af():
     return {"message": "not implemented yet"}
 
 
 @app.get("/user/")
-def user():
+async def user():
     return {"message": "not implemented yet"}
 
 
 @app.post("/chat/")
-def chat(chat: Chat):
-    response = generate_essay(chat.text)
-    response = remove_prefix(response)
-    return {"response": response}
+async def chat(user_chat: Chat):
+    try:
+        return process_chat(
+            metadata_db_dependency=metadata_db_dependency, user_chat=user_chat
+        )
+    except Exception as e:
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=e.__str__())
