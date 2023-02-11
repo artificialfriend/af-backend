@@ -1,9 +1,6 @@
-from typing import List
-
 from sqlalchemy import Column, func, ForeignKey, TEXT
-from sqlalchemy.dialects.postgresql import VARCHAR, TIMESTAMP, INTEGER, BOOLEAN
-
-from metadata_db_constants import Base
+from sqlalchemy.dialects.postgresql import TIMESTAMP, INTEGER, BOOLEAN
+from database.metadata_db_constants import Base
 from schema.chat import Chat
 
 
@@ -25,11 +22,3 @@ class ChatRecord(Base):
 
     def __repr__(self):
         return "<ChatRecord(id={self.id!r})>".format(self=self)
-
-
-def insert(session, chat: Chat):
-    session.add(ChatRecord(chat))
-
-
-def find_all_by_user_id(session, user_id: str, offset: int, limit: int) -> List[Chat]:
-    pass
