@@ -44,6 +44,19 @@ def process_chat(metadata_db_dependency, user_chat: Chat):
 
 
 def store_af_and_user(metadata_db_dependency, af: AF, user: User):
+    if af.af_id != user.af_id:
+        raise HTTPException(status_code=400, detail="af_id does not match")
     with session_context(metadata_db_dependency.get_session()) as session:
+        user_record = (
+            session.query(UserRecord).filter(UserRecord.user_id == user.user_id).first()
+        )
+
+        if user_record is not None:
+            raise HTTPException(status_code=400, detail="user already exists")
+
+        af_record = session.query(AFRecord).filter(AFRecord.af_id == af.af_id).first()
+        if af_record is not None:
+            raise HTTPException(status_code=400, detail="user already exists")
+
         session.add(AFRecord(af))
         session.add(UserRecord(user))

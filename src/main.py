@@ -35,40 +35,42 @@ logger = logging.getLogger(__name__)
 
 metadata_db_dependency = MetadataDbDependency()
 
+# todo(conscioustahoe): use asyncio
+
 
 @app.get("/")
 async def root():
-    # todo: only allow requests from an iOS device
-    # todo: check request signature, valid user_id, etc. to validate request
-    # todo: use async-await
-    return {"message": "welcome to af"}
+    return {"response": "welcome to af"}
 
 
 @app.put("/signup/")
 async def sign_up(af: AF, user: User):
     try:
-        store_af_and_user(metadata_db_dependency=metadata_db_dependency, af=af, user=user)
-        return "ok"
+        store_af_and_user(
+            metadata_db_dependency=metadata_db_dependency, af=af, user=user
+        )
+        return {"response": "af and user successfully registered"}
     except Exception as e:
         raise HTTPException(status_code=500, detail=e.__str__())
 
 
 @app.get("/af/")
 async def af():
-    return {"message": "not implemented yet"}
+    return {"response": "not implemented yet"}
 
 
 @app.get("/user/")
 async def user():
-    return {"message": "not implemented yet"}
+    return {"response": "not implemented yet"}
 
 
 @app.post("/chat/")
 async def chat(user_chat: Chat):
     try:
-        return process_chat(
+        last_2_chats = process_chat(
             metadata_db_dependency=metadata_db_dependency, user_chat=user_chat
         )
+        return {"response": last_2_chats}
     except Exception as e:
         traceback.print_exc()
         raise HTTPException(status_code=500, detail=e.__str__())
