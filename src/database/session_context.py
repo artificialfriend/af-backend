@@ -1,6 +1,7 @@
 import logging
 from contextlib import contextmanager
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
+from sqlalchemy.orm import Session
 
 from util.exception_util import (
     HttpError,
@@ -10,7 +11,7 @@ from util.exception_util import (
 
 
 @contextmanager
-def session_context(session):
+def session_context(session: Session) -> Session:
     try:
         yield session
         session.commit()

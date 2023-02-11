@@ -3,7 +3,7 @@ import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from metadata_db_constants import (
+from database.metadata_db_constants import (
     Base,
     CONNECTION_URL,
     PG_ADVISORY_LOCK_METADATA_DB,
@@ -27,9 +27,6 @@ def create_metadata_db_engine():
 
 class MetadataDbDependency:
     def __init__(self):
-        """
-        todo: use this as a singleton
-        """
         self.engine = create_metadata_db_engine()
         self.instantiate_tables()
         self.Session = sessionmaker(bind=self.engine)
@@ -50,9 +47,3 @@ class MetadataDbDependency:
 
     def get_session(self):
         return self.session
-
-    def stop(self):
-        pass
-
-    def kill(self):
-        pass
