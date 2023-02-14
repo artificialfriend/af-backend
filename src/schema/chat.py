@@ -5,7 +5,7 @@ from pydantic import BaseModel
 
 class Chat(BaseModel):
     chat_id: Optional[str] = None
-    user_id: str
+    user_id: int
     text: str
     is_prompt: bool
     created_at: Optional[datetime] = None

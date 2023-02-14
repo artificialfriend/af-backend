@@ -12,7 +12,7 @@ def get_metadata_db_dependency():
 
 def create_chat_object():
     chat_dict = {
-        "user_id": "Wolf",
+        "user_id": 1,
         "text": "hello",
         "is_prompt": True,
     }
