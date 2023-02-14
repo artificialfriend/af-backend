@@ -1,11 +1,15 @@
 from datetime import datetime
+from typing import Optional
+
 from pydantic import BaseModel
 
 
 class User(BaseModel):
-    user_id: str
+    user_id: Optional[int]
     af_id: str
-    email: str
-    first_name: str
-    last_name: str
-    birth_date: datetime
+    apple_user_id: str
+    email: Optional[str]
+    given_name: str
+    family_name: str
+    nick_name: str
+    birthday: datetime

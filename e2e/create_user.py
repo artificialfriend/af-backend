@@ -11,12 +11,13 @@ def get_metadata_db_dependency():
 
 def create_user_object():
     user_dict = {
-        "user_id": "Wolf",
-        "af_id": "Klara#1",
+        "af_id": "1",
+        "apple_user_id": "11",
         "email": "klara@afinc.com",
-        "first_name": "Rob",
-        "last_name": "Stark",
-        "birth_date": "2005-05-02 1:10",
+        "given_name": "Aegon",
+        "family_name": "Targaryen",
+        "nick_name": "Jon",
+        "birthday": "2005-02-25 1:10"
     }
     user = User(**user_dict)
     return user
@@ -24,6 +25,7 @@ def create_user_object():
 
 def create_user(metadata_db_dependency):
     user = create_user_object()
+    print(user)
     with session_context(metadata_db_dependency.get_session()) as session:
         session.add(UserRecord(user))
 
