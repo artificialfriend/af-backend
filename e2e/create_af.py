@@ -11,13 +11,13 @@ def get_metadata_db_dependency():
 
 def create_af_object():
     af_dict = {
-        "af_id": "Klara#1",
-        "skin_color": "Caramel",
-        "freckles": "Few",
+        "name": "Ghost",
+        "skin_color": "Purple",
+        "freckles": "Freckles",
         "hair_color": "White",
-        "hair_style": "Wavy",
-        "eye_color": "Hazel",
-        "eye_lashes": "Straight",
+        "hair_style": "Hairstyle 1",
+        "eye_color": "Blue",
+        "eye_lashes": "Long Eyelashes",
     }
     af = AF(**af_dict)
     return af
