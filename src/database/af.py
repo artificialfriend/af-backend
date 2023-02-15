@@ -1,7 +1,9 @@
 from datetime import datetime
-from sqlalchemy import Column, Date, func, TEXT
+from sqlalchemy import Column, func, TEXT
 from sqlalchemy.dialects.postgresql import TIMESTAMP, INTEGER
+from sqlalchemy.orm import relationship
 from database.metadata_db_constants import Base
+from database.user import UserRecord
 from schema.af import AF
 
 
@@ -9,6 +11,7 @@ class AFRecord(Base):
     __tablename__ = "af"
 
     af_id = Column(INTEGER, primary_key=True)
+    user = relationship("UserRecord", uselist=False)
     name = Column(TEXT, nullable=False)
     skin_color = Column(TEXT, nullable=False)
     freckles = Column(TEXT, nullable=False)
@@ -16,7 +19,7 @@ class AFRecord(Base):
     hair_style = Column(TEXT, nullable=False)
     eye_color = Column(TEXT, nullable=False)
     eye_lashes = Column(TEXT, nullable=False)
-    birthday = Column(Date, nullable=False)
+    birthday = Column(TEXT, nullable=False)
     updated_at = Column(
         TIMESTAMP,
         nullable=False,
@@ -24,7 +27,7 @@ class AFRecord(Base):
         onupdate=func.current_timestamp(),
     )
 
-    def __init__(self, af: AF):
+    def __init__(self, af: AF, user: UserRecord = None):
         self.af_id = af.af_id
         self.name = af.name
         self.skin_color = af.skin_color.value
@@ -35,5 +38,8 @@ class AFRecord(Base):
         self.eye_lashes = af.eye_lashes.value
         self.birthday = datetime.now().date()
 
+        if user:
+            self.user = user
+
     def __repr__(self):
-        return "<AFRecord(id={self.id!r})>".format(self=self)
+        return "<AFRecord(id={self.af_id!r})>".format(self=self)

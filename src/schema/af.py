@@ -25,10 +25,10 @@ class HairColor(Enum):
 
 
 class HairStyle(Enum):
-    Hairstyle1 = "Hairstyle 1"
-    Hairstyle2 = "Hairstyle 2"
-    Hairstyle3 = "Hairstyle 3"
-    Hairstyle4 = "Hairstyle 4"
+    Hairstyle1 = "1"
+    Hairstyle2 = "2"
+    Hairstyle3 = "3"
+    Hairstyle4 = "4"
 
 
 class EyeColor(Enum):
@@ -41,8 +41,8 @@ class EyeColor(Enum):
 
 
 class EyeLashes(Enum):
-    ShortEyelashes = "Short Eyelashes"
-    LongEyelashes = "Long Eyelashes"
+    ShortEyelashes = "Short"
+    LongEyelashes = "Long"
 
 
 class AF(BaseModel):
@@ -54,3 +54,7 @@ class AF(BaseModel):
     hair_style: HairStyle
     eye_color: EyeColor
     eye_lashes: EyeLashes
+    birthday: Optional[str]
+
+    class Config:
+        orm_mode = True
