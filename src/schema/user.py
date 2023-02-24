@@ -7,7 +7,7 @@ from schema.af import AF
 
 class User(BaseModel):
     user_id: Optional[int]
-    af_id: Optional[str]
+    af_id: Optional[int]
     af: Optional[AF]
     apple_user_id: str
     email: Optional[str]

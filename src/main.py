@@ -2,7 +2,6 @@ import logging
 import traceback
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-
 from database.af import AFRecord
 from database.chat import ChatRecord
 from database.metadata_db_dependency import MetadataDbDependency
@@ -44,6 +43,11 @@ metadata_db_dependency = MetadataDbDependency()
 # todo: use asyncio
 
 
+def is_valid_signature(request_headers):
+    # todo: add implementation
+    return True
+
+
 @app.get("/")
 async def root():
     return {"response": "af is live!"}
@@ -52,6 +56,8 @@ async def root():
 @app.put("/signup/apple/")
 async def signup_with_apple(af: AF, user: User):
     try:
+        if not is_valid_signature({}):
+            raise HTTPException(status_code=403, detail="forbidden")
         with session_context(metadata_db_dependency.get_session()) as session:
             user_record = (
                 session.query(UserRecord)
@@ -70,12 +76,15 @@ async def signup_with_apple(af: AF, user: User):
             new_user = User.from_orm(new_user_record)
         return {"response": new_user}
     except Exception as e:
+        # todo: return raised status code and detail
         raise HTTPException(status_code=500, detail=e.__str__())
 
 
 @app.get("/signin/apple")
 async def signin_with_apple(apple_user_id: str):
     try:
+        if not is_valid_signature({}):
+            raise HTTPException(status_code=403, detail="forbidden")
         with session_context(metadata_db_dependency.get_session()) as session:
             user_record = (
                 session.query(UserRecord)
@@ -91,6 +100,8 @@ async def signin_with_apple(apple_user_id: str):
 @app.post("/chat/")
 async def chat(user_chat: Chat):
     try:
+        if not is_valid_signature({}):
+            raise HTTPException(status_code=403, detail="forbidden")
         with session_context(metadata_db_dependency.get_session()) as session:
             user = (
                 session.query(UserRecord)
