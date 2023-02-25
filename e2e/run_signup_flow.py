@@ -28,11 +28,11 @@ def create_af_object():
 
 def create_user_object():
     user_dict = {
-        "apple_user_id": "2",
-        "email": "klara1@afinc.com",
+        "apple_user_id": "6",
+        "email": "klara5@afinc.com",
         "given_name": "Aegon",
         "family_name": "Targaryen",
-        "nick_name": "Jon",
+        "nick_names": ["Jon"],
         "birthday": "2005-02-25",
     }
     user = User(**user_dict)

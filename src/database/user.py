@@ -1,4 +1,5 @@
-from sqlalchemy import Column, func, ForeignKey, TEXT, INTEGER
+from sqlalchemy import Column, func, ForeignKey, TEXT, INTEGER, ARRAY
+from sqlalchemy.ext.mutable import MutableList
 from sqlalchemy.dialects.postgresql import TIMESTAMP
 from sqlalchemy.orm import relationship
 from database.metadata_db_constants import Base
@@ -17,7 +18,7 @@ class UserRecord(Base):
     email = Column(TEXT, unique=True, nullable=False)
     given_name = Column(TEXT, nullable=False)
     family_name = Column(TEXT, nullable=False)
-    nick_name = Column(TEXT, nullable=False)
+    nick_names = Column(MutableList.as_mutable(ARRAY(TEXT)), nullable=False)
     birthday = Column(TEXT, nullable=False)
     created_at = Column(
         TIMESTAMP, nullable=False, server_default=func.current_timestamp()
@@ -36,7 +37,7 @@ class UserRecord(Base):
         self.email = user.email
         self.given_name = user.given_name
         self.family_name = user.family_name
-        self.nick_name = user.nick_name
+        self.nick_names = user.nick_names
         self.birthday = user.birthday
 
     def __repr__(self):

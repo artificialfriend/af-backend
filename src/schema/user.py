@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, List
 
 from pydantic import BaseModel
 
@@ -13,7 +13,7 @@ class User(BaseModel):
     email: Optional[str]
     given_name: str
     family_name: str
-    nick_name: str
+    nick_names: List[str]
     birthday: str
 
     class Config:

@@ -11,7 +11,7 @@ from database.metadata_db_constants import (
 from database import af, chat, user  # noqa
 
 
-CURRENT_ALEMBIC_VERSION = ""
+CURRENT_ALEMBIC_VERSION = "c7c30e2017e9"
 
 
 def create_metadata_db_engine():
