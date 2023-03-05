@@ -1,4 +1,4 @@
-from pretrained_transformer.gpt3 import get_gpt_response
+from pretrained_transformer.gpt3 import get_gpt_3_response
 
 
 def mock_response():
@@ -27,6 +27,6 @@ def test_generate_essay(mocker):
     mocker.patch(
         "pretrained_transformer.gpt3.send_request", return_value=mock_response()
     )
-    response = get_gpt_response("hello")
+    response = get_gpt_3_response("hello")
     print(response)
     assert response == "\n\nHi there! How can I help you?"

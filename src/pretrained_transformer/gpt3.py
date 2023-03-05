@@ -9,43 +9,39 @@ from tenacity import (
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 
-@retry(wait=wait_random_exponential(min=1, max=60), stop=stop_after_attempt(5))
 def extract_text(response):
     if "choices" in response and len(response["choices"]) > 0:
-        return response["choices"][0]["text"]
+        if "text" in response["choices"][0]:
+            return response["choices"][0]["text"]
+        elif "message" in response["choices"][0]:
+            return response["choices"][0]["message"]["content"]
     else:
         raise RuntimeError("Something Went Wrong")
 
 
-def send_request(
-    prompt,
-    model,
-    temperature,
-    max_tokens,
-    top_p,
-    frequency_penalty,
-    presence_penalty,
-) -> str:
+@retry(wait=wait_random_exponential(min=1, max=60), stop=stop_after_attempt(5))
+def get_gpt_3_response(prompt) -> str:
     response = openai.Completion.create(
-        model=model,
+        model="text-davinci-003",
         prompt=prompt,
-        temperature=temperature,
-        max_tokens=max_tokens,
-        top_p=top_p,
-        frequency_penalty=frequency_penalty,
-        presence_penalty=presence_penalty,
+        temperature=0.3,
+        max_tokens=150,
+        top_p=1.0,
+        frequency_penalty=0.0,
+        presence_penalty=0.0,
     )
-    return response
+    return extract_text(response)
 
 
-def get_gpt_response(prompt) -> str:
-    model_parameters = {
-        "model": "text-davinci-003",
-        "temperature": 0.3,
-        "max_tokens": 150,
-        "top_p": 1.0,
-        "frequency_penalty": 0.0,
-        "presence_penalty": 0.0,
-    }
-    response = send_request(prompt, **model_parameters)
+@retry(wait=wait_random_exponential(min=1, max=60), stop=stop_after_attempt(5))
+def get_gpt_3_5_response(context) -> str:
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=context,
+        temperature=0.3,
+        max_tokens=1000,
+        top_p=1.0,
+        frequency_penalty=1.0,
+        presence_penalty=1.0,
+    )
     return extract_text(response)
