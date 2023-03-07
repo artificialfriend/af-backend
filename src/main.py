@@ -1,7 +1,7 @@
 import logging
-import traceback
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+
 from database.af import AFRecord
 from database.chat import ChatRecord
 from database.metadata_db_dependency import MetadataDbDependency
@@ -11,7 +11,7 @@ from pretrained_transformer.gpt3 import get_gpt_3_response, get_gpt_3_5_response
 from schema.af import AF
 from schema.chat import Chat
 from schema.user import User
-from util.chat_util import get_last_two_chats, get_chat_context
+from util.chat_util import get_chat_context
 from util.string_util import remove_prefix
 
 app = FastAPI()
@@ -104,13 +104,6 @@ async def chat(user_chat: Chat):
         if not is_valid_signature({}):
             raise HTTPException(status_code=403, detail="forbidden")
         with session_context(metadata_db_dependency.get_session()) as session:
-            user = (
-                session.query(UserRecord)
-                .filter(UserRecord.user_id == user_chat.user_id)
-                .first()
-            )
-            if user is None:
-                raise HTTPException(status_code=400, detail={"user not found"})
             session.add(ChatRecord(chat=user_chat))
             af_chat = Chat(
                 user_id=user_chat.user_id,
@@ -118,32 +111,17 @@ async def chat(user_chat: Chat):
                 is_prompt=False,
             )
             session.add(ChatRecord(chat=af_chat))
-            session.flush()
-            chat_records = get_last_two_chats(session, af_chat)
-        last_two_chats = []
-        for chat_record in chat_records:
-            last_two_chats.append(Chat.from_orm(chat_record))
-
-        return {"response": last_two_chats}
-    except Exception as e:
-        traceback.print_exc()
-        raise HTTPException(status_code=500, detail=e.__str__())
+        return {"response": af_chat.dict(exclude={"chat_id", "behaviour"})}
+    except BaseException:
+        raise HTTPException(status_code=500, detail="Internal Server Error")
 
 
 @app.post("/chat/turbo")
 async def chat_turbo(user_chat: Chat):
-    # store user in memory lru cache
     try:
         if not is_valid_signature({}):
             raise HTTPException(status_code=403, detail="forbidden")
         with session_context(metadata_db_dependency.get_session()) as session:
-            user = (
-                session.query(UserRecord)
-                .filter(UserRecord.user_id == user_chat.user_id)
-                .first()
-            )
-            if user is None:
-                raise HTTPException(status_code=400, detail={"user not found"})
             if not user_chat.is_prompt:
                 user_chat.is_prompt = True
             session.add(ChatRecord(chat=user_chat))
@@ -154,13 +132,6 @@ async def chat_turbo(user_chat: Chat):
                 is_prompt=False,
             )
             session.add(ChatRecord(chat=af_chat))
-            session.flush()
-            chat_records = get_last_two_chats(session, af_chat)
-        last_two_chats = []
-        for chat_record in chat_records:
-            last_two_chats.append(Chat.from_orm(chat_record))
-
-        return {"response": last_two_chats}
-    except Exception as e:
-        traceback.print_exc()
-        raise HTTPException(status_code=500, detail=e.__str__())
+        return {"response": af_chat.dict(exclude={"chat_id", "behaviour"})}
+    except BaseException:
+        raise HTTPException(status_code=500, detail="Internal Server Error")
