@@ -24,7 +24,6 @@ class ChatRecord(Base):
             self.model = "text-human"
         else:
             self.model = "text-davinci-003"
-        self.created_at = chat.created_at
 
     def __repr__(self):
         return "<ChatRecord(id={self.chat_id!r})>".format(self=self)
