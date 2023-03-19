@@ -13,7 +13,9 @@ class ChatRecord(Base):
     is_prompt = Column(BOOLEAN, nullable=False)
     model = Column(TEXT, nullable=False)
     created_at = Column(
-        TIMESTAMP(timezone=True), nullable=False, server_default=func.current_timestamp()
+        TIMESTAMP(timezone=True),
+        nullable=False,
+        server_default=func.current_timestamp(),
     )
 
     def __init__(self, chat: Chat):
@@ -23,7 +25,7 @@ class ChatRecord(Base):
         if self.is_prompt:
             self.model = "text-human"
         else:
-            self.model = "text-davinci-003"
+            self.model = chat.model
 
     def __repr__(self):
         return "<ChatRecord(id={self.chat_id!r})>".format(self=self)
