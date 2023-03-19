@@ -13,7 +13,7 @@ class ChatRecord(Base):
     is_prompt = Column(BOOLEAN, nullable=False)
     model = Column(TEXT, nullable=False)
     created_at = Column(
-        TIMESTAMP, nullable=False, server_default=func.current_timestamp()
+        TIMESTAMP(timezone=True), nullable=False, server_default=func.current_timestamp()
     )
 
     def __init__(self, chat: Chat):
