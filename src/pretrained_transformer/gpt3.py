@@ -19,7 +19,7 @@ def extract_text(response):
         raise RuntimeError("Something Went Wrong")
 
 
-@retry(wait=wait_random_exponential(multiplier=0.5, max=30), stop=stop_after_attempt(3))
+@retry(wait=wait_random_exponential(multiplier=0.5, max=60), stop=stop_after_attempt(3))
 def get_gpt_3_response(prompt) -> str:
     response = openai.Completion.create(
         model="text-davinci-003",
@@ -33,7 +33,7 @@ def get_gpt_3_response(prompt) -> str:
     return extract_text(response)
 
 
-@retry(wait=wait_random_exponential(multiplier=0.5, max=30), stop=stop_after_attempt(3))
+@retry(wait=wait_random_exponential(multiplier=0.5, max=60), stop=stop_after_attempt(3))
 def get_gpt_3_5_response(context) -> str:
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
