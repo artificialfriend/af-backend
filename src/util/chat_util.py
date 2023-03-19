@@ -14,7 +14,7 @@ def get_chat_context(session: Session, user_chat: Chat):
     chat_records = (
         session.query(ChatRecord)
         .filter(ChatRecord.user_id == user_chat.user_id)
-        .order_by(desc(ChatRecord.created_at))
+        .order_by(desc(ChatRecord.chat_id))
         .limit(depth)
     )
     chat_context = [
