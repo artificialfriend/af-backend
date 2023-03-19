@@ -109,6 +109,7 @@ async def chat(user_chat: Chat):
                 user_id=user_chat.user_id,
                 text=remove_prefix(get_gpt_3_response(user_chat.text)),
                 is_prompt=False,
+                model="text-davinci-003",
             )
             session.add(ChatRecord(chat=af_chat))
         return {"response": af_chat.dict(exclude={"chat_id", "behaviour"})}
@@ -130,6 +131,7 @@ async def chat_turbo(user_chat: Chat):
                 user_id=user_chat.user_id,
                 text=remove_prefix(get_gpt_3_5_response(context=chat_context)),
                 is_prompt=False,
+                model="gpt-3.5-turbo",
             )
             session.add(ChatRecord(chat=af_chat))
         return {"response": af_chat.dict(exclude={"chat_id", "behaviour"})}
