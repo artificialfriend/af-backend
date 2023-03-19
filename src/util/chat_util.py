@@ -20,7 +20,7 @@ def get_chat_context(session: Session, user_chat: Chat):
     chat_context = [
         {"role": "system", "content": user_chat.behaviour},
     ]
-    for chat_record in chat_records:
+    for chat_record in chat_records[::-1]:
         chat = Chat.from_orm(chat_record)
         if chat.is_prompt:
             chat_context.append(
