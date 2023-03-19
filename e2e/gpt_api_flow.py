@@ -1,5 +1,5 @@
 import time
-from pretrained_transformer.gpt3 import get_gpt_3_5_response, get_gpt_3_response
+from pretrained_transformer.gpt3 import get_gpt_3_5_response
 
 
 def run():
