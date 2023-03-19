@@ -6,18 +6,15 @@ def run():
     start_time = time.perf_counter()
     context = [
         {"role": "system", "content": "You are a helpful assistant."},
-        {"role": "user", "content": "Explain second law of thermodynamics?"},
+        {"role": "user", "content": "What is Albert Einstein famous for?"},
         {
             "role": "assistant",
-            "content": "The second law of thermodynamics is a rule that says things in our world "
-            "tend to get more messy over time. This means that when we use energy, "
-            "like when we play with toys or run around outside, some of the energy turns "
-            "into heat and gets lost. We can't get it back! It's like trying to put "
-            "toothpaste back into the tube once you've squeezed it out - you just can't "
-            "do it! So, this law tells us that everything tends to become less organized "
-            "and more random as time goes on.",
+            "content": "Albert Einstein is famous for his contributions to the field of physics, particularly his "
+            "theory of relativity. He also made significant advancements in the study of quantum mechanics "
+            "and statistical mechanics. Additionally, he was awarded the Nobel Prize in Physics in 1921 "
+            "for his explanation of the photoelectric effect.",
         },
-        {"role": "user", "content": "Now explain the third law."},
+        {"role": "user", "content": "Was he married?"},
     ]
     print("waiting for get_gpt_3_5_response...")
     response = get_gpt_3_5_response(context=context)

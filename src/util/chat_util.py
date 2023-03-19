@@ -1,7 +1,11 @@
+import logging
+
 from sqlalchemy.orm import Session
 
 from database.chat import ChatRecord
 from schema.chat import Chat
+
+logger = logging.getLogger(__name__)
 
 
 def get_chat_context(session: Session, user_chat: Chat):
@@ -9,7 +13,7 @@ def get_chat_context(session: Session, user_chat: Chat):
     chat_records = (
         session.query(ChatRecord)
         .filter(ChatRecord.user_id == user_chat.user_id)
-        .order_by(ChatRecord.created_at.asc())
+        .order_by(ChatRecord.created_at.desc())
         .limit(depth)
     )
     chat_context = [
