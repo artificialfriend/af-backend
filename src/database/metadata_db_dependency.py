@@ -29,7 +29,7 @@ class MetadataDbDependency:
     def __init__(self):
         self.engine = create_metadata_db_engine()
         self.instantiate_tables()
-        self.Session = sessionmaker(bind=self.engine)
+        self.Session = sessionmaker(bind=self.engine, autoflush=False)
         self.session = self.Session()
 
     def instantiate_tables(self):
