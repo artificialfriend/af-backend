@@ -112,7 +112,7 @@ async def chat(user_chat: Chat):
                 model="text-davinci-003",
             )
             session.add(ChatRecord(chat=af_chat))
-        return {"response": af_chat.dict(exclude={"chat_id", "behaviour"})}
+        return {"response": af_chat.dict(exclude={"chat_id", "behaviour", "model"})}
     except BaseException:
         raise HTTPException(status_code=500, detail="Internal Server Error")
 
@@ -134,6 +134,6 @@ async def chat_turbo(user_chat: Chat):
                 model="gpt-3.5-turbo",
             )
             session.add(ChatRecord(chat=af_chat))
-        return {"response": af_chat.dict(exclude={"chat_id", "behaviour"})}
+        return {"response": af_chat.dict(exclude={"chat_id", "behaviour", "model"})}
     except BaseException:
         raise HTTPException(status_code=500, detail="Internal Server Error")

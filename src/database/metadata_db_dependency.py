@@ -21,7 +21,7 @@ def create_metadata_db_engine():
         os.getenv("DB_HOST"),
         os.getenv("DB_PORT"),
     )
-    engine = create_engine(connection_url, echo=True)
+    engine = create_engine(connection_url, echo=True, pool_pre_ping=True)
     return engine
 
 
