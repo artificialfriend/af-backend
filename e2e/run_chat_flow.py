@@ -34,7 +34,7 @@ def run_chat_flow(metadata_db_dependency):
                 user_id=user_chat.user_id,
                 text=remove_prefix(get_gpt_3_5_response(context=chat_context)),
                 is_prompt=False,
-                model="gpt-3.5-turbo"
+                model="gpt-3.5-turbo",
             )
             session.add(ChatRecord(chat=af_chat))
         return {"response": af_chat.dict(exclude={"chat_id", "behaviour", "model"})}
