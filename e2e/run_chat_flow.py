@@ -18,7 +18,7 @@ def get_metadata_db_dependency():
 
 
 def create_chat_object():
-    chat_dict = {"user_id": 1, "text": "was he married?"}
+    chat_dict = {"user_id": 1, "text": "what's the coolest chemical equation?"}
     return Chat(**chat_dict)
 
 
@@ -34,9 +34,10 @@ def run_chat_flow(metadata_db_dependency):
                 user_id=user_chat.user_id,
                 text=remove_prefix(get_gpt_3_5_response(context=chat_context)),
                 is_prompt=False,
+                model="gpt-3.5-turbo"
             )
             session.add(ChatRecord(chat=af_chat))
-        return {"response": af_chat.dict(exclude={"chat_id", "behaviour"})}
+        return {"response": af_chat.dict(exclude={"chat_id", "behaviour", "model"})}
     except Exception as e:
         raise HTTPException(status_code=500, detail=e.__str__())
 
