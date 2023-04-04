@@ -137,3 +137,14 @@ async def chat_turbo(user_chat: Chat):
         return {"response": af_chat.dict(exclude={"chat_id", "behaviour", "model"})}
     except BaseException:
         raise HTTPException(status_code=500, detail="Internal Server Error")
+
+
+@app.get("/image/")
+async def get_image_from_prompt(prompt: str):
+    try:
+        if not is_valid_signature({}):
+            raise HTTPException(status_code=403, detail="forbidden")
+        image_url = get_image_from_prompt(prompt=prompt)
+        return {"response": image_url}
+    except BaseException:
+        raise HTTPException(status_code=500, detail="Internal Server Error")

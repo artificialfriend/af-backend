@@ -45,3 +45,13 @@ def get_gpt_3_5_response(context) -> str:
         presence_penalty=1.0,
     )
     return extract_text(response)
+
+
+def get_image_from_text(prompt):
+    response = openai.Image.create(
+        prompt=prompt,
+        n=1,
+        size="1024x1024"
+    )
+    image_url = response['data'][0]['url']
+    return image_url
