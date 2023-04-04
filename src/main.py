@@ -7,7 +7,7 @@ from database.chat import ChatRecord
 from database.metadata_db_dependency import MetadataDbDependency
 from database.session_context import session_context
 from database.user import UserRecord
-from pretrained_transformer.gpt3 import get_gpt_3_response, get_gpt_3_5_response
+from pretrained_transformer.gpt3 import get_gpt_3_response, get_gpt_3_5_response, get_image_from_text
 from schema.af import AF
 from schema.chat import Chat
 from schema.user import User
@@ -144,7 +144,7 @@ async def get_image_from_prompt(prompt: str):
     try:
         if not is_valid_signature({}):
             raise HTTPException(status_code=403, detail="forbidden")
-        image_url = get_image_from_prompt(prompt=prompt)
+        image_url = get_image_from_text(prompt=prompt)
         return {"response": image_url}
     except BaseException:
         raise HTTPException(status_code=500, detail="Internal Server Error")
