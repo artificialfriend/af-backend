@@ -17,7 +17,6 @@
 10. Alembic (database schema updates)
 11. Lint
     1. Black
-12. Logging (soon)
 
 ## Local
 
