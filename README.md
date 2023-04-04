@@ -9,14 +9,10 @@
 5. Gunicorn and Uvicorn
 6. PostgreSQL
 7. Docker
-8. Google Cloud Platform (build, storage, run)
-9. Transformers
-   1. GPT-3
-   2. Galactica (soon)
-   3. Embedding (soon)
+8. Google Cloud Platform
+9. Open AI Transformers
 10. Alembic (database schema updates)
-11. Lint
-    1. Black
+11. Black
 
 ## Local
 
