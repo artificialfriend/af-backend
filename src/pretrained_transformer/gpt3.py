@@ -38,8 +38,7 @@ def get_gpt_3_5_response(context) -> str:
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=context,
-        temperature=0.3,
-        max_tokens=1000,
+        temperature=0.2,
         top_p=1.0,
         frequency_penalty=1.0,
         presence_penalty=1.0,
