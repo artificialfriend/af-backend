@@ -5,16 +5,9 @@ from pretrained_transformer.gpt3 import get_gpt_3_5_response, get_image_from_tex
 def chat_completion():
     start_time = time.perf_counter()
     context = [
-        {"role": "system", "content": "You are a helpful assistant."},
-        {"role": "user", "content": "What is Albert Einstein famous for?"},
-        {
-            "role": "assistant",
-            "content": "Albert Einstein is famous for his contributions to the field of physics, particularly his "
-            "theory of relativity. He also made significant advancements in the study of quantum mechanics "
-            "and statistical mechanics. Additionally, he was awarded the Nobel Prize in Physics in 1921 "
-            "for his explanation of the photoelectric effect.",
-        },
-        {"role": "user", "content": "Was he married?"},
+        {"role": "system", "content": "You are a helpful assistant"},
+        {"role": "user", "content":
+            "Write an in-depth article world war 2. Include a title but don't include subheadings."},
     ]
     print("waiting for get_gpt_3_5_response...")
     response = get_gpt_3_5_response(context=context)
@@ -31,8 +24,8 @@ def image_generation():
 
 
 def run():
-    # chat_completion()
-    image_generation()
+    chat_completion()
+    # image_generation()
 
 
 if __name__ == "__main__":
