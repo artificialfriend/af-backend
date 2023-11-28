@@ -39,7 +39,7 @@ logging.basicConfig(
 
 logger = logging.getLogger(__name__)
 
-metadata_db_dependency = MetadataDbDependency()
+# metadata_db_dependency = MetadataDbDependency()
 
 # todo: use asyncio
 
